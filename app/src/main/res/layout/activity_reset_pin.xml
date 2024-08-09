@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/textid"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:ems="10"
+        android:inputType="text"
+        android:layout_gravity="center"
+        android:hint="Mobile Number" />
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <EditText
+            android:id="@+id/otp"
+            android:layout_width="123dp"
+            android:layout_height="60dp"
+            android:ems="10"
+            android:hint="OTP"
+            android:inputType="text" />
+
+        <Button
+            android:id="@+id/getotp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Get" />
+
+    </GridLayout>
+
+    <EditText
+        android:id="@+id/editTextNewPin"
+        android:layout_width="212dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="20dp"
+        android:hint="Enter New PIN"
+        android:inputType="numberPassword" />
+
+    <Button
+        android:id="@+id/buttonResetPin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset PIN"/>
+
+</LinearLayout>
