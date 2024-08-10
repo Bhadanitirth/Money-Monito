@@ -1,132 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
 
 
-
-    <TextView
-        android:id="@+id/name_no"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
-        android:text="TextView" />
-
-    <EditText
-        android:id="@+id/editTextPin"
-        android:layout_width="wrap_content"
-        android:layout_height="55dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/name_no"
-        android:layout_marginTop="20dp"
-        android:hint="Enter Security PIN"
-        android:maxLength="4"
-        android:inputType="numberPassword"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:clickable="false" />
-
-    <TextView
-        android:id="@+id/ForgetPin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/editTextPin"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="Forget PIN?" />
-
-    <GridLayout
-        android:id="@+id/numberGridLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ForgetPin"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:columnCount="3">
-
-        <Button
-            android:id="@+id/b1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1"/>
-        <Button
-            android:id="@+id/b2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2"/>
-        <Button
-            android:id="@+id/b3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="3"/>
-        <Button
-            android:id="@+id/b4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="4"/>
-        <Button
-            android:id="@+id/b5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="5"/>
-        <Button
-            android:id="@+id/b6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="6"/>
-        <Button
-            android:id="@+id/b7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="7"/>
-        <Button
-            android:id="@+id/b8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="8"/>
-        <Button
-            android:id="@+id/b9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="9"/>
-    </GridLayout>
-
     <Button
-        android:id="@+id/b0"
+        android:id="@+id/pin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/numberGridLayout"
-        android:layout_centerHorizontal="true"
-        android:text="0" />
-
-    <Button
-        android:id="@+id/clear_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/numberGridLayout"
-        android:layout_toEndOf="@id/b0"
-        android:text="Back"/>
-
-    <TextView
-        android:id="@+id/Sign_Up"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/b0"
-        android:layout_marginTop="60dp"
-        android:layout_marginLeft="59dp"
-        android:text="Sign_Up"
-        android:textSize="20dp"/>
-
-    <TextView
-        android:id="@+id/Switch_User"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/b0"
-        android:layout_marginTop="60dp"
-        android:layout_marginLeft="209dp"
-        android:text="Switch_User"
-        android:textSize="20dp"/>
-
+        android:text="pin" />
 </RelativeLayout>

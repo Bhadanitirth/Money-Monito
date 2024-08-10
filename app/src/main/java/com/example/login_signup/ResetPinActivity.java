@@ -1,5 +1,6 @@
 package com.example.login_signup;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +14,7 @@ public class ResetPinActivity extends AppCompatActivity {
     EditText editTextPhone, editTextOtp, editTextNewPin;
     Button buttonGetOtp, buttonResetPin;
     Login_Signin_Db dbHelper;
-
+Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,7 @@ public class ResetPinActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String phone = editTextPhone.getText().toString();
-                // Implement OTP sending logic here
+                // OTP sending later
                 Toast.makeText(ResetPinActivity.this, "OTP sent to " + phone, Toast.LENGTH_SHORT).show();
             }
         });
@@ -46,7 +47,8 @@ public class ResetPinActivity extends AppCompatActivity {
                 // Verify OTP and reset PIN
                 if (dbHelper.verifyOtpAndResetPin(phone, otp, newPin)) {
                     Toast.makeText(ResetPinActivity.this, "PIN reset successfully!", Toast.LENGTH_SHORT).show();
-                    // Navigate to login or main activity
+                    intent=new Intent(ResetPinActivity.this,Pin.class);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(ResetPinActivity.this, "OTP verification failed!", Toast.LENGTH_SHORT).show();
                 }

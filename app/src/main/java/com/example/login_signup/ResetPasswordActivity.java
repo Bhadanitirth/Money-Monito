@@ -1,5 +1,6 @@
 package com.example.login_signup;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +14,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
     EditText editTextPhone, editTextOtp, editTextNewPassword;
     Button buttonGetOtp, buttonResetPassword;
     Login_Signin_Db dbHelper;
-
+Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +32,7 @@ public class ResetPasswordActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String phone = editTextPhone.getText().toString();
-                // Implement OTP sending logic here
+                // OTP sending later
                 Toast.makeText(ResetPasswordActivity.this, "OTP sent to " + phone, Toast.LENGTH_SHORT).show();
             }
         });
@@ -46,7 +47,8 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 // Verify OTP and reset password
                 if (dbHelper.verifyOtpAndResetPassword(phone, otp, newPassword)) {
                     Toast.makeText(ResetPasswordActivity.this, "Password reset successfully!", Toast.LENGTH_SHORT).show();
-                    // Navigate to login or main activity
+                    intent=new Intent(ResetPasswordActivity.this,Login.class);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(ResetPasswordActivity.this, "OTP verification failed!", Toast.LENGTH_SHORT).show();
                 }

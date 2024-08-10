@@ -37,7 +37,7 @@ public class Login extends AppCompatActivity {
                 String password = editTextPassword.getText().toString();
 
                 if (dbHelper.checkUserCredentials(phone, password)) {
-                    Intent intent = new Intent(Login.this, MainActivity.class);
+                    Intent intent = new Intent(Login.this, Pin.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(Login.this, "Invalid credentials!", Toast.LENGTH_SHORT).show();
@@ -52,7 +52,7 @@ public class Login extends AppCompatActivity {
 
                 if (!phone.isEmpty()) {
                     Intent intent = new Intent(Login.this, ResetPasswordActivity.class);
-                    intent.putExtra("phone", phone);
+                    //intent.putExtra("phone", phone);
                     startActivity(intent);
                 } else {
                     Toast.makeText(Login.this, "Please enter your phone number!", Toast.LENGTH_SHORT).show();

@@ -59,43 +59,60 @@ public class Login_Signin_Db extends SQLiteOpenHelper {
 
     public boolean checkUserCredentials(String phone, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String[] columns = {COLUMN_PHONE};
-        String selection = COLUMN_PHONE + " = ? AND " + COLUMN_PASSWORD + " = ?";
-        String[] selectionArgs = {phone, password};
+        String sql = "SELECT " + COLUMN_PHONE + ", " + COLUMN_PASSWORD +
+                " FROM " + TABLE_USERS +
+                " WHERE " + COLUMN_PHONE + " = ? AND " + COLUMN_PASSWORD + " = ?";
+        Cursor cursor = db.rawQuery(sql, new String[]{phone, password});
 
-        Cursor cursor = db.query(TABLE_USERS, columns, selection, selectionArgs, null, null, null);
         boolean exists = cursor.getCount() > 0;
         cursor.close();
         return exists;
     }
 
     public boolean verifyOtpAndResetPin(String phone, String otp, String newPin) {
-        // Implement OTP verification logic here
-        // For simplicity, let's assume OTP is always correct
+        // OTP verification logic later
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_PIN, newPin);
 
-        String selection = COLUMN_PHONE + " = ?";
-        String[] selectionArgs = {phone};
+        // Construct the SQL UPDATE query
+        String sql = "UPDATE " + TABLE_USERS +
+                " SET " + COLUMN_PIN + " = ?" +
+                " WHERE " + COLUMN_PHONE + " = ?";
 
-        int rowsAffected = db.update(TABLE_USERS, values, selection, selectionArgs);
+        // Execute the SQL query
+        db.execSQL(sql, new String[]{newPin, phone});
+
+        // Check if the update was successful (optional)
+        Cursor cursor = db.rawQuery("SELECT changes()", null);
+        cursor.moveToFirst();
+        int rowsAffected = cursor.getInt(0);
+        cursor.close();
+
         return rowsAffected > 0;
     }
+
 
     public boolean verifyOtpAndResetPassword(String phone, String otp, String newPassword) {
         // Implement OTP verification logic here
         // For simplicity, let's assume OTP is always correct
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_PASSWORD, newPassword);
 
-        String selection = COLUMN_PHONE + " = ?";
-        String[] selectionArgs = {phone};
+        // Construct the SQL UPDATE query
+        String sql = "UPDATE " + TABLE_USERS +
+                " SET " + COLUMN_PASSWORD + " = ?" +
+                " WHERE " + COLUMN_PHONE + " = ?";
 
-        int rowsAffected = db.update(TABLE_USERS, values, selection, selectionArgs);
+        // Execute the SQL query
+        db.execSQL(sql, new String[]{newPassword, phone});
+
+        // Optionally, check if the update was successful
+        Cursor cursor = db.rawQuery("SELECT changes()", null);
+        cursor.moveToFirst();
+        int rowsAffected = cursor.getInt(0);
+        cursor.close();
+
         return rowsAffected > 0;
     }
+
 
     public Boolean getStoredPin(String enteredPin) {
         SQLiteDatabase db = this.getReadableDatabase();
