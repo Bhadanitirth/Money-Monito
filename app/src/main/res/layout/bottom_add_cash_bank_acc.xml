@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/add_dialog_bg">
+
+    <TextView
+        android:id="@+id/Payment_Method"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:text="Payment Method"/>
+
+    <RelativeLayout
+        android:id="@+id/cash"
+        android:layout_below="@+id/Payment_Method"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/icon_cash"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/cash" />
+
+        <TextView
+            android:id="@+id/text_cash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/icon_cash"
+            android:text="Cash"
+            android:layout_marginStart="10dp"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_marginTop="10dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bank_account"
+        android:layout_below="@+id/cash"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/icon_bank"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/bank" />
+
+        <TextView
+            android:id="@+id/text_bank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/icon_bank"
+            android:text="Bank Account"
+            android:layout_marginStart="10dp"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_marginTop="10dp" />
+    </RelativeLayout>
+
+</RelativeLayout>

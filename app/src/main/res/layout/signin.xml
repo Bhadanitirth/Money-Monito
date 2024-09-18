@@ -2,70 +2,89 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:layout_gravity="center"
+        card_view:cardCornerRadius="30dp"
+        card_view:cardElevation="20dp"
+        android:background="@drawable/edit_text_background">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
     <TextView
         android:id="@+id/signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:layout_marginLeft="100dp"
+       android:layout_gravity="center"
         android:text="Sign Up"
+        android:layout_marginTop="5dp"
         android:textSize="30dp"/>
-
-    <TextView
-        android:id="@+id/easy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:text="It's quick and easy." />
 
     <EditText
         android:id="@+id/textfname"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_text_background"
         android:ems="10"
         android:inputType="text"
-        android:layout_marginTop="5dp"
+        android:padding="8dp"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:hint="First Name" />
 
     <EditText
         android:id="@+id/textsurname"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:ems="10"
+        android:padding="8dp"
+        android:background="@drawable/edit_text_background"
         android:inputType="text"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center"
-        android:hint="Surname" />
+        android:hint="Lastname" />
 
     <EditText
         android:id="@+id/textid"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
+        android:background="@drawable/edit_text_background"
         android:ems="10"
-        android:inputType="text"
+        android:layout_marginTop="10dp"
+        android:inputType="number"
+        android:padding="8dp"
         android:layout_gravity="center"
         android:hint="Mobile Number" />
 
     <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center">
 
         <EditText
             android:id="@+id/otp"
             android:layout_width="123dp"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:ems="10"
+            android:padding="8dp"
+            android:background="@drawable/edit_text_background"
             android:hint="OTP"
             android:inputType="text" />
 
         <Button
             android:id="@+id/getotp"
             android:layout_width="wrap_content"
+            android:background="@drawable/edit_text_background"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:text="Get" />
 
     </GridLayout>
@@ -73,17 +92,23 @@
     <EditText
         android:id="@+id/textpass"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
+        android:padding="8dp"
         android:ems="10"
         android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_text_background"
         android:inputType="textPassword"
-        android:hint="New Password"/>
+        android:hint="Password"/>
 
     <EditText
         android:id="@+id/TextPin"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:ems="10"
+        android:padding="8dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_text_background"
         android:maxLength="4"
         android:inputType="numberPassword"
         android:layout_gravity="center"
@@ -92,26 +117,21 @@
     <EditText
         android:id="@+id/dob"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
+        android:padding="8dp"
         android:layout_gravity="center"
+        android:background="@drawable/edit_text_background"
         android:ems="10"
+        android:layout_marginTop="10dp"
         android:hint="Date of Birth"
         android:inputType="date" />
-
-
-    <TextView
-        android:id="@+id/Gender"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="5dp"
-        android:text="Gender" />
 
     <RadioGroup
         android:id="@+id/radioGroupGender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
+       android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
         <RadioButton
@@ -135,19 +155,34 @@
 
     <Button
         android:id="@+id/bsignin"
-        android:layout_width="122dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_text_background"
         android:text="Sign Up" />
+
+            <TextView
+                android:id="@+id/text7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:text="Already have an account?"
+                />
 
     <TextView
         android:id="@+id/gologin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="180dp"
-        android:text="Login"
-        android:textSize="20dp"/>
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:text="Login here!"
+        android:textSize="20dp"
+        android:layout_marginBottom="20dp"/>
 
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

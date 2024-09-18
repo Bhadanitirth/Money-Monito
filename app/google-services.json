@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "764058484717",
+    "project_id": "money-monitor-97b10",
+    "storage_bucket": "money-monitor-97b10.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:764058484717:android:93ed4dad741efda93eb1e4",
+        "android_client_info": {
+          "package_name": "com.example.login_signup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBT0HaptOyDjMwc-edbadD_AuH6SLkvyEA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

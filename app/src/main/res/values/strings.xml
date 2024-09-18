@@ -1,3 +1,108 @@
 <resources>
     <string name="app_name">login_signUp</string>
+    <string name="Select">Select Pay Method</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_list">add_list</string>
+    <string name="title_activity_bottom_navi">BottomNavi</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string-array name="month_names">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
+
+    <string-array name="week_ranges">
+        <!-- January -->
+        <item>01 Jan to 07 Jan</item>
+        <item>08 Jan to 14 Jan</item>
+        <item>15 Jan to 21 Jan</item>
+        <item>22 Jan to 28 Jan</item>
+        <item>29 Jan to 04 Feb</item>
+
+        <!-- February (Non-Leap Year) -->
+        <item>05 Feb to 11 Feb</item>
+        <item>12 Feb to 18 Feb</item>
+        <item>19 Feb to 25 Feb</item>
+        <item>26 Feb to 03 Mar</item>
+
+        <!-- March -->
+        <item>04 Mar to 10 Mar</item>
+        <item>11 Mar to 17 Mar</item>
+        <item>18 Mar to 24 Mar</item>
+        <item>25 Mar to 31 Mar</item>
+        <item>01 Apr to 07 Apr</item>
+
+        <!-- April -->
+        <item>08 Apr to 14 Apr</item>
+        <item>15 Apr to 21 Apr</item>
+        <item>22 Apr to 28 Apr</item>
+        <item>29 Apr to 05 May</item>
+
+        <!-- May -->
+        <item>06 May to 12 May</item>
+        <item>13 May to 19 May</item>
+        <item>20 May to 26 May</item>
+        <item>27 May to 02 Jun</item>
+
+        <!-- June -->
+        <item>03 Jun to 09 Jun</item>
+        <item>10 Jun to 16 Jun</item>
+        <item>17 Jun to 23 Jun</item>
+        <item>24 Jun to 30 Jun</item>
+        <item>01 Jul to 07 Jul</item>
+
+        <!-- July -->
+        <item>08 Jul to 14 Jul</item>
+        <item>15 Jul to 21 Jul</item>
+        <item>22 Jul to 28 Jul</item>
+        <item>29 Jul to 04 Aug</item>
+
+        <!-- August -->
+        <item>05 Aug to 11 Aug</item>
+        <item>12 Aug to 18 Aug</item>
+        <item>19 Aug to 25 Aug</item>
+        <item>26 Aug to 01 Sep</item>
+
+        <!-- September -->
+        <item>02 Sep to 08 Sep</item>
+        <item>09 Sep to 15 Sep</item>
+        <item>16 Sep to 22 Sep</item>
+        <item>23 Sep to 29 Sep</item>
+        <item>30 Sep to 06 Oct</item>
+
+        <!-- October -->
+        <item>07 Oct to 13 Oct</item>
+        <item>14 Oct to 20 Oct</item>
+        <item>21 Oct to 27 Oct</item>
+        <item>28 Oct to 03 Nov</item>
+
+        <!-- November -->
+        <item>04 Nov to 10 Nov</item>
+        <item>11 Nov to 17 Nov</item>
+        <item>18 Nov to 24 Nov</item>
+        <item>25 Nov to 01 Dec</item>
+
+        <!-- December -->
+        <item>02 Dec to 08 Dec</item>
+        <item>09 Dec to 15 Dec</item>
+        <item>16 Dec to 22 Dec</item>
+        <item>23 Dec to 29 Dec</item>
+        <item>30 Dec to 31 Dec</item>
+    </string-array>
+
 </resources>
+
