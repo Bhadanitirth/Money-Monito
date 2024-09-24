@@ -8,13 +8,21 @@
     android:layout_margin="8dp">
 
     <!-- TODO: Update blank fragment layout -->
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 <RelativeLayout
     android:id="@+id/date_time"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="60dp"
+    android:layout_marginTop="40dp"
     android:layout_centerHorizontal="true">
+
     <EditText
         android:id="@+id/date_picker"
         android:layout_width="wrap_content"
@@ -181,5 +189,13 @@
         android:src="@android:drawable/ic_menu_save"
         android:contentDescription="Save"/>
 
+    <TextView
+        android:layout_below="@id/Save"
+        android:layout_width="150dp"
+        android:layout_height="150dp"/>
+
+</RelativeLayout>
+
+</ScrollView>
 
 </RelativeLayout>

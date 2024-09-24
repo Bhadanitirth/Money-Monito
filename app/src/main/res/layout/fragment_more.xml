@@ -24,16 +24,6 @@
         android:text="Name" />
 
 
-    <ImageView
-        android:id="@+id/log_out"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:contentDescription="Log Out"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="8dp"
-        android:src="@drawable/logout" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -53,15 +43,28 @@
                 card_view:cardElevation="16dp"
                 android:background="@drawable/edit_text_background">
 
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/Transaction_img"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/tran_list"/>
+
                 <TextView
                     android:id="@+id/Transaction"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16dp"
-                    android:layout_gravity="center"
-                    android:padding="16dp"
+                    android:layout_toEndOf="@id/Transaction_img"
+                    android:padding="14dp"
                     android:text="Transaction" />
 
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -75,15 +78,28 @@
                 android:layout_toEndOf="@id/Transaction_card"
                 android:background="@drawable/edit_text_background">
 
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/Scheduled_img"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/sch_txns"/>
+
                 <TextView
                     android:id="@+id/Scheduled_Txns"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16dp"
-                    android:padding="16dp"
-                    android:layout_gravity="center"
+                    android:padding="14dp"
+                    android:layout_toEndOf="@id/Scheduled_img"
                     android:text="Scheduled" />
 
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -97,15 +113,29 @@
                 android:layout_below="@+id/Transaction_card"
                 android:background="@drawable/edit_text_background">
 
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/Budget_img"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/budgets"/>
+
                 <TextView
                     android:id="@+id/Budget"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16dp"
-                    android:padding="16dp"
+                    android:layout_toEndOf="@id/Budget_img"
+                    android:padding="14dp"
                     android:layout_gravity="center"
                     android:text="Budget" />
 
+                </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
 
@@ -121,14 +151,29 @@
                 android:layout_toEndOf="@id/Budget_card"
                 android:background="@drawable/edit_text_background">
 
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/Categories_img"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/category"/>
+
                 <TextView
                     android:id="@+id/Categories"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16dp"
                     android:layout_gravity="center"
-                    android:padding="16dp"
+                    android:padding="14dp"
+                    android:layout_toEndOf="@+id/Categories_img"
                     android:text="Categories" />
+
+                </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
 
@@ -143,14 +188,29 @@
                 android:layout_below="@+id/Budget_card"
                 android:background="@drawable/edit_text_background">
 
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/Tags_img"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/tags"/>
+
                 <TextView
                     android:id="@+id/Tags"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16dp"
                     android:layout_gravity="center"
-                    android:padding="16dp"
+                    android:padding="14dp"
+                    android:layout_toEndOf="@+id/Tags_img"
                     android:text="Tags" />
+
+                </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
 
@@ -166,14 +226,29 @@
                 android:layout_toEndOf="@id/Tags_card"
                 android:background="@drawable/edit_text_background">
 
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/GO_Premium_img"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/diamond"/>
+
                 <TextView
                     android:id="@+id/GO_Premium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16dp"
                     android:layout_gravity="center"
-                    android:padding="16dp"
-                    android:text="GO Premium" />
+                    android:padding="14dp"
+                    android:layout_toEndOf="@id/GO_Premium_img"
+                    android:text="Premium" />
+
+                </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
 
@@ -279,10 +354,10 @@
 
                 <ImageView
                     android:id="@+id/Setting_img"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="20dp"
-                    card_view:srcCompat="@drawable/baseline_person_24" />
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="5dp"
+                    card_view:srcCompat="@drawable/setting" />
 
                 <TextView
                     android:id="@+id/Setting_s"
@@ -301,10 +376,11 @@
                 android:layout_below="@id/Setting_lay">
                 <ImageView
                     android:id="@+id/Invite_friend_img"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginBottom="20dp"
-                    card_view:srcCompat="@drawable/baseline_person_24" />
+                    android:layout_margin="5dp"
+                    card_view:srcCompat="@drawable/invite_friend" />
 
                 <TextView
                     android:id="@+id/Invite_friend"
@@ -323,10 +399,10 @@
                 android:layout_below="@id/Invite_friend_lay">
                 <ImageView
                     android:id="@+id/Rate_app_img"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="20dp"
-                    card_view:srcCompat="@drawable/baseline_person_24" />
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="5dp"
+                    card_view:srcCompat="@drawable/rate" />
 
                 <TextView
                     android:id="@+id/Rate_app"
@@ -345,10 +421,10 @@
                 android:layout_below="@id/Rate_app_lay">
                 <ImageView
                     android:id="@+id/Query_feedback_img"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="20dp"
-                    card_view:srcCompat="@drawable/baseline_person_24" />
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="5dp"
+                    card_view:srcCompat="@drawable/feedback" />
 
                 <TextView
                     android:id="@+id/Query_feedback"
@@ -367,10 +443,10 @@
                 android:layout_below="@id/Query_feedback_lay">
                 <ImageView
                     android:id="@+id/FAQs_img"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="20dp"
-                    card_view:srcCompat="@drawable/baseline_person_24" />
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="5dp"
+                    card_view:srcCompat="@drawable/faqs" />
 
                 <TextView
                     android:id="@+id/FAQ_s"
@@ -389,10 +465,10 @@
                 android:layout_below="@id/FAQs_lay">
                 <ImageView
                     android:id="@+id/About_app_img"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="20dp"
-                    card_view:srcCompat="@drawable/baseline_person_24" />
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="5dp"
+                    card_view:srcCompat="@drawable/about_app" />
 
                 <TextView
                     android:id="@+id/About_app"
@@ -404,7 +480,37 @@
 
             </GridLayout>
 
+            <GridLayout
+                android:id="@+id/log_out_lay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/About_app_lay">
+
+                <ImageView
+                    android:id="@+id/log_out_img"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="5dp"
+                    card_view:srcCompat="@drawable/sout" />
+
+                <TextView
+                    android:id="@+id/log_out"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textSize="16dp"
+                    android:layout_margin="8dp"
+                    android:text="Sign out"/>
+
+            </GridLayout>
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_below="@+id/log_out_lay"/>
+
+
         </RelativeLayout>
+
 
     </ScrollView>
 

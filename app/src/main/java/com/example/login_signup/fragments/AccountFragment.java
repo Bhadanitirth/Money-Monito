@@ -29,7 +29,7 @@ public class AccountFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view= inflater.inflate(R.layout.fragment_account, container, false);
 
 
@@ -41,10 +41,8 @@ public class AccountFragment extends Fragment {
         Cash =view.findViewById(R.id.cash);
         show_balance=view.findViewById(R.id.switchShowBalance);
 
-        // Initialize database helpers
         listDb = new FinancialDB(getActivity());
 
-        // Set the initial values
         updateBalanceVisibility(show_balance.isChecked());
 
         // Set the listener for the switch

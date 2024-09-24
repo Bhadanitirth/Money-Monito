@@ -78,8 +78,8 @@ public class Login_Signin_Db extends SQLiteOpenHelper {
     }
 
 
-    public boolean verifyOtpAndResetPin(String phone, String otp, String newPin) {
-        // OTP verification logic later
+    public boolean ResetPin(String phone, String newPin) {
+
         SQLiteDatabase db = this.getWritableDatabase();
         String sql = "UPDATE " + TABLE_USERS +
                 " SET " + COLUMN_PIN + " = ?" +
@@ -154,6 +154,27 @@ public class Login_Signin_Db extends SQLiteOpenHelper {
 
         cursor.close();
         return firstName+surname;
+    }
+
+    public String getGender(String phone)
+    {
+        String gender=null;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String sql = "SELECT " + COLUMN_GENDER + " FROM " + TABLE_USERS +
+                " WHERE " + COLUMN_PHONE + " = ?";
+        Cursor cursor = db.rawQuery(sql, new String[]{phone});
+
+        if (cursor.moveToFirst()) {
+            int index1 = cursor.getColumnIndex(COLUMN_GENDER);
+
+            if (index1 != -1) {
+                gender = cursor.getString(index1);
+                            }
+        }
+
+        cursor.close();
+        return gender;
     }
 
 }

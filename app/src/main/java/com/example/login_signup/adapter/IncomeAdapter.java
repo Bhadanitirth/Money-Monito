@@ -56,7 +56,7 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.IncomeView
                 return incomeCategoryImages[i];
             }
         }
-        return R.drawable.other; // Default image
+        return R.drawable.other;
     }
 
     @Override

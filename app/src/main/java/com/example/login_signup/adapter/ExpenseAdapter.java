@@ -20,7 +20,6 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
     private final Context context;
     private final ArrayList<HashMap<String, Object>> expenseList;
 
-    // Arrays for category names and images
     private final String[] categoryNames = {
             "Other", "Food", "Shopping", "Travelling", "Medical", "Education",
             "Rent", "Entertainment", "Personal Care", "Gift and Donation"
@@ -49,7 +48,6 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
         holder.amount.setText("₹" + expense.get("amount").toString());
         holder.category.setText(category);
 
-        // Set image resource based on category
         int imageResId = getCategoryImage(category);
         holder.expenseImage.setImageResource(imageResId);
     }
@@ -59,14 +57,13 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ExpenseV
         return expenseList.size();
     }
 
-    // Method to get the image resource ID based on category
     private int getCategoryImage(String category) {
         for (int i = 0; i < categoryNames.length; i++) {
             if (categoryNames[i].equalsIgnoreCase(category)) {
                 return categoryImages[i];
             }
         }
-        return R.drawable.other; // Default image
+        return R.drawable.other;
     }
 
     public static class ExpenseViewHolder extends RecyclerView.ViewHolder {

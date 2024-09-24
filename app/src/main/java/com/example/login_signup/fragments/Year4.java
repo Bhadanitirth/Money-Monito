@@ -42,10 +42,9 @@ public class Year4 extends Fragment {
         View view = inflater.inflate(R.layout.fragment_year4, container, false);
 
         TextView yearText = view.findViewById(R.id.year_text);
-        int startYear = 1950; // Update this to the start year
+        int startYear = 2020; // Update this to the start year
         yearText.setText(String.valueOf(startYear + yearIndex));
 
-        // Initialize PieChart
         PieChart pieChart = view.findViewById(R.id.spending_pieChart);
 
         List<PieEntry> entries = new ArrayList<>();

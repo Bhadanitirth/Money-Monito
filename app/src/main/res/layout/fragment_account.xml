@@ -4,26 +4,33 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:padding="16dp">
 
 
-
-<ScrollView android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/all_acc"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:text="All Account"
+        android:textSize="25dp" />
 
+    <TextView
+        android:id="@+id/add_acc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:text="+ Add account"
+        android:layout_marginTop="5dp"
+        android:textSize="20dp" />
 
         <TextView
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Transactions based balance"
+            android:layout_below="@id/all_acc"
+            android:layout_marginTop="20dp"
             android:textSize="16dp" />
 
         <TextView
@@ -40,6 +47,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:textSize="16dp"
+            android:layout_marginTop="30dp"
+            android:layout_below="@id/add_acc"
             android:text="Show Balance" />
 
         <androidx.cardview.widget.CardView
@@ -187,6 +196,5 @@
         </androidx.cardview.widget.CardView>
 
 
-    </RelativeLayout>
-</ScrollView>
+
 </RelativeLayout>

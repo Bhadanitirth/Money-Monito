@@ -21,7 +21,7 @@ public class MonthFragmentAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 12; // 12 months
+        return 12;
     }
 }
 

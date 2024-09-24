@@ -24,16 +24,17 @@ import com.example.login_signup.allEntry;
 
 public class MoreFragment extends Fragment {
 
-    ImageView logout;
-    TextView name;
+    ImageView profile_img;
+    TextView logout,name;
     Intent intent;
     SharedPreferences sdp;
     CardView Transaction_card,GO_Premium_card,Tags_card;
+    Login_Signin_Db database;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view= inflater.inflate(R.layout.fragment_more, container, false);
 
         logout=view.findViewById(R.id.log_out);
@@ -41,12 +42,26 @@ public class MoreFragment extends Fragment {
         GO_Premium_card=view.findViewById(R.id.GO_Premium_card);
         Tags_card=view.findViewById(R.id.Tags_card);
         name =view.findViewById(R.id.profile_name);
+        profile_img=view.findViewById(R.id.profile_img);
 
         sdp = getActivity().getSharedPreferences("user_details", Context.MODE_PRIVATE);
         String phone = sdp.getString("phone", "null");
 
         Login_Signin_Db dbHelper = new Login_Signin_Db(requireContext());
         String firstName = dbHelper.getFirstNameByPhone(phone);
+
+
+        database=new Login_Signin_Db(getActivity());
+
+        profile_img=view.findViewById(R.id.profile_img);
+        String gender=database.getGender(phone);
+        if(gender.equals("Male")){
+            profile_img.setImageResource(R.drawable.male);
+        }else if(gender.equals("FeMale")){
+            profile_img.setImageResource(R.drawable.female);
+        }else{
+            profile_img.setImageResource(R.drawable.coustom);
+        }
 
         if (name != null) {
             name.setText(String.format(firstName));

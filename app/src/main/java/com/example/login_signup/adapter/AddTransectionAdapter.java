@@ -20,19 +20,20 @@ public class AddTransectionAdapter extends FragmentStateAdapter {
         super(addTransaction);
     }
 
+    String Type = "-1";
     @NonNull
     @Override
     public Fragment createFragment(int position) {
         switch ((position))
         {
             case 0:
-                return new Expense();
+                return new Expense(Type);
             case 1:
-                return new Income();
+                return new Income(Type);
             case 2:
-                return new Transfer();
+                return new Transfer(Type);
             default:
-                return new Expense();
+                return new Expense(Type);
         }
     }
 

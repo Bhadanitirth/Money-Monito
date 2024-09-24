@@ -23,7 +23,7 @@ com.example.login_signup.adapter.AnalysisAdapter AnalysisAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view= inflater.inflate(R.layout.fragment_analisis, container, false);
 
         tabLayout=view.findViewById(R.id.tabfortime);

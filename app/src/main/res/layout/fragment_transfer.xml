@@ -8,11 +8,19 @@
     android:layout_margin="8dp">
 
     <!-- Date and Time Picker -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
     <RelativeLayout
         android:id="@+id/date_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:layout_centerHorizontal="true">
 
         <EditText
@@ -23,7 +31,7 @@
             android:hint="Select date"
             android:focusable="false"
             android:textStyle="bold"
-            android:textSize="16sp"
+            android:textSize="20dp"
             android:clickable="true"/>
 
         <EditText
@@ -35,7 +43,7 @@
             android:layout_toEndOf="@id/date_picker"
             android:focusable="false"
             android:textStyle="bold"
-            android:textSize="16sp"
+            android:textSize="20dp"
             android:clickable="true"/>
     </RelativeLayout>
 
@@ -65,7 +73,7 @@
             android:drawablePadding="20dp"
             android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
             android:textStyle="bold"
-            android:textSize="16sp"/>
+            android:textSize="20dp"/>
 
         <TextView
             android:id="@+id/from"
@@ -97,7 +105,7 @@
             android:drawablePadding="20dp"
             android:focusable="false"
             android:text="Bank Account"
-            android:textSize="16sp"
+            android:textSize="20dp"
             android:textStyle="bold"/>
 
         <TextView
@@ -130,7 +138,7 @@
             android:drawablePadding="20dp"
             android:focusable="false"
             android:text="Bank Account"
-            android:textSize="16sp"
+            android:textSize="20dp"
             android:textStyle="bold"/>
 
         <TextView
@@ -150,7 +158,7 @@
             android:drawableStart="@drawable/baseline_person_24"
             android:drawablePadding="20dp"
             android:textStyle="bold"
-            android:textSize="16sp"
+            android:textSize="20dp"
             android:hint="Write a note"/>
 
         <EditText
@@ -162,7 +170,7 @@
             android:drawableStart="@drawable/baseline_person_24"
             android:drawablePadding="20dp"
             android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
-            android:textSize="16sp"
+            android:textSize="20dp"
             android:hint="Add Attachment"/>
 
     </RelativeLayout>
@@ -177,5 +185,13 @@
         android:layout_margin="20dp"
         android:src="@android:drawable/ic_menu_save"
         android:contentDescription="Save"/>
+
+            <TextView
+                android:layout_below="@id/Save"
+                android:layout_width="150dp"
+                android:layout_height="150dp"/>
+
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

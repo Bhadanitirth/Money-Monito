@@ -45,7 +45,6 @@ public class Week4 extends Fragment {
         String[] weekDays = getResources().getStringArray(R.array.week_ranges);
         weekText.setText(weekDays[dayIndex]);
 
-        // Initialize PieChart
         PieChart pieChart = view.findViewById(R.id.spending_pieChart);
 
         List<PieEntry> entries = new ArrayList<>();

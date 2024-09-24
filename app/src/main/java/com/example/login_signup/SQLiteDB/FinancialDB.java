@@ -15,12 +15,11 @@ import java.util.Calendar;
 public class FinancialDB extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "FinancialData.db";
-    private static final int DATABASE_VERSION = 2; // Incremented version for schema change
+    private static final int DATABASE_VERSION = 3; // Incremented version for schema change
 
-    // Table name
+
     public static final String TABLE_FINANCIAL = "FinancialRecords";
 
-    // Common columns
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_DATE = "date";
     public static final String COLUMN_TIME = "time";
@@ -29,17 +28,15 @@ public class FinancialDB extends SQLiteOpenHelper {
     public static final String COLUMN_ATTACHMENT = "attachment";
     public static final String COLUMN_PHONE = "phone";
 
-    // Income-specific columns
     public static final String COLUMN_INCOME_CATEGORY = "income_category";
     public static final String COLUMN_INCOME_PAYMENT_METHOD = "income_payment_method";
 
-    // Expense-specific columns
     public static final String COLUMN_EXPENSE_CATEGORY = "expense_category";
     public static final String COLUMN_EXPENSE_PAYMENT_METHOD = "expense_payment_method";
 
-    // Transfer-specific columns
     public static final String COLUMN_FROM_ACCOUNT = "from_account";
     public static final String COLUMN_TO_ACCOUNT = "to_account";
+    public static final String COLUMN_TYPE = "type";
 
     public FinancialDB(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -61,7 +58,8 @@ public class FinancialDB extends SQLiteOpenHelper {
                 + COLUMN_EXPENSE_CATEGORY + " TEXT DEFAULT NULL,"
                 + COLUMN_EXPENSE_PAYMENT_METHOD + " TEXT DEFAULT NULL,"
                 + COLUMN_FROM_ACCOUNT + " TEXT DEFAULT NULL,"
-                + COLUMN_TO_ACCOUNT + " TEXT DEFAULT NULL"
+                + COLUMN_TO_ACCOUNT + " TEXT DEFAULT NULL,"
+                + COLUMN_TYPE + " TEXT DEFAULT NULL"
                 + ")";
         db.execSQL(CREATE_FINANCIAL_TABLE);
     }
@@ -75,8 +73,6 @@ public class FinancialDB extends SQLiteOpenHelper {
 
     }
 
-    // Insert methods for each type of record
-
     public long insertIncome(String date, String time, double amount, String category, String paymentMethod, String note, String attachment, String phone) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -88,6 +84,7 @@ public class FinancialDB extends SQLiteOpenHelper {
         values.put(COLUMN_NOTE, note);
         values.put(COLUMN_ATTACHMENT, attachment);
         values.put(COLUMN_PHONE, phone);
+        values.put(COLUMN_TYPE, "income");
 
         return db.insert(TABLE_FINANCIAL, null, values);
     }
@@ -103,6 +100,7 @@ public class FinancialDB extends SQLiteOpenHelper {
         values.put(COLUMN_NOTE, note);
         values.put(COLUMN_ATTACHMENT, attachment);
         values.put(COLUMN_PHONE, phone);
+        values.put(COLUMN_TYPE, "expense");
 
         return db.insert(TABLE_FINANCIAL, null, values);
     }
@@ -118,11 +116,11 @@ public class FinancialDB extends SQLiteOpenHelper {
         values.put(COLUMN_NOTE, note);
         values.put(COLUMN_ATTACHMENT, attachment);
         values.put(COLUMN_PHONE, phone);
+        values.put(COLUMN_TYPE, "transfer");
 
         return db.insert(TABLE_FINANCIAL, null, values);
     }
 
-    // Retrieve records for a specific phone and date range
     @SuppressLint("Range")
     public ArrayList<HashMap<String, String>> GetUsers(String phone, int month, int year, String type) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -224,7 +222,7 @@ public class FinancialDB extends SQLiteOpenHelper {
         String yearStr = String.valueOf(year);
 
         String query = null;
-        query = "SELECT amount, income_category, income_payment_method, expense_category, expense_payment_method, note ,date ,from_account, to_account FROM " + TABLE_FINANCIAL
+        query = "SELECT id, amount, income_category, income_payment_method, expense_category, expense_payment_method, note ,date ,from_account, to_account, type, time FROM " + TABLE_FINANCIAL
                 + " WHERE " + COLUMN_PHONE + " = ? AND substr(" + COLUMN_DATE + ", 4, 2) = ? AND substr(" + COLUMN_DATE + ", 7, 4) = ?" ;
 
         Cursor cursor = db.rawQuery(query, new String[]{phone, monthStr, yearStr});
@@ -234,6 +232,7 @@ public class FinancialDB extends SQLiteOpenHelper {
 
             user.put("amount", cursor.getString(cursor.getColumnIndex(COLUMN_AMOUNT)));
             user.put("note", cursor.getString(cursor.getColumnIndex(COLUMN_NOTE)));
+            user.put("time", cursor.getString(cursor.getColumnIndex(COLUMN_TIME)));
             user.put("date", cursor.getString(cursor.getColumnIndex(COLUMN_DATE)));
             user.put("income_category", cursor.getString(cursor.getColumnIndex(COLUMN_INCOME_CATEGORY)));
             user.put("income_payment_method", cursor.getString(cursor.getColumnIndex(COLUMN_INCOME_PAYMENT_METHOD)));
@@ -244,6 +243,11 @@ public class FinancialDB extends SQLiteOpenHelper {
             user.put("from_account", cursor.getString(cursor.getColumnIndex(COLUMN_FROM_ACCOUNT)));
             user.put("to_account", cursor.getString(cursor.getColumnIndex(COLUMN_TO_ACCOUNT)));
 
+            user.put("type", cursor.getString(cursor.getColumnIndex(COLUMN_TYPE)));
+
+            int id = cursor.getInt(cursor.getColumnIndex(COLUMN_ID));
+            user.put("id", String.valueOf(id));
+
             recordList.add(user);
         }
 
@@ -251,6 +255,83 @@ public class FinancialDB extends SQLiteOpenHelper {
         db.close();
         return recordList;
     }
+
+    @SuppressLint("Range")
+    public ArrayList<HashMap<String, String>> getData(String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ArrayList<HashMap<String, String>> recordList = new ArrayList<>();
+
+        String query = "SELECT amount, income_category, income_payment_method, expense_category, expense_payment_method, note, date, from_account, to_account, type, time FROM " + TABLE_FINANCIAL
+                + " WHERE " + COLUMN_ID + " = ?";
+
+        Cursor cursor = db.rawQuery(query, new String[]{id});
+
+        while (cursor.moveToNext()) {
+            HashMap<String, String> user = new HashMap<>();
+
+            // Retrieve data using column indices
+            user.put("amount", cursor.getString(0));  // amount
+            user.put("income_category", cursor.getString(1));  // income_category
+            user.put("income_payment_method", cursor.getString(2));  // income_payment_method
+            user.put("expense_category", cursor.getString(3));  // expense_category
+            user.put("expense_payment_method", cursor.getString(4));  // expense_payment_method
+            user.put("note", cursor.getString(5));  // note
+            user.put("date", cursor.getString(6));  // date
+            user.put("from_account", cursor.getString(7));  // from_account
+            user.put("to_account", cursor.getString(8));  // to_account
+            user.put("type", cursor.getString(9));  // type
+            user.put("time", cursor.getString(10));  // time
+
+            recordList.add(user);
+        }
+
+        cursor.close();
+        db.close();
+        return recordList;
+    }
+
+
+    public int updateList(int id, String date, String time, double amount, String category, String paymentMethod, String note, String attachment, String type) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_DATE, date);
+        values.put(COLUMN_TIME, time);
+        values.put(COLUMN_AMOUNT, amount);
+        values.put(COLUMN_NOTE, note);
+        values.put(COLUMN_ATTACHMENT, attachment);
+
+        // Check if it's income or expense and update the corresponding columns
+        if (type.equals("income")) {
+            values.put(COLUMN_INCOME_CATEGORY, category);
+            values.put(COLUMN_INCOME_PAYMENT_METHOD, paymentMethod);
+        } else if (type.equals("expense")) {
+            values.put(COLUMN_EXPENSE_CATEGORY, category);
+            values.put(COLUMN_EXPENSE_PAYMENT_METHOD, paymentMethod);
+        }else if (type.equals("expense")) {
+            values.put(COLUMN_FROM_ACCOUNT, category);
+            values.put(COLUMN_TO_ACCOUNT, paymentMethod);
+        }
+
+        // Update the record where ID matches
+        return db.update(TABLE_FINANCIAL, values, COLUMN_ID + "=?", new String[]{String.valueOf(id)});
+    }
+
+
+
+    public int delete(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String selection = COLUMN_ID + " = ?";
+
+        String[] selectionArgs = { String.valueOf(id) };
+
+        int deletedRows = db.delete(TABLE_FINANCIAL, selection, selectionArgs);
+
+        db.close();
+        return deletedRows;
+    }
+
+
 
     public double getTotalForMonth(int month, int year, String phone, boolean isIncome) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -274,7 +355,6 @@ public class FinancialDB extends SQLiteOpenHelper {
         return totalAmount;
     }
 
-    // Get total amount per category for income
     public HashMap<String, Double> getTotalIncomeByCategory(String phone, int month, int year) {
         SQLiteDatabase db = this.getReadableDatabase();
         HashMap<String, Double> incomeByCategory = new HashMap<>();
@@ -299,7 +379,6 @@ public class FinancialDB extends SQLiteOpenHelper {
         return incomeByCategory;
     }
 
-    // Get total amount per category for expenses
     public HashMap<String, Double> getTotalExpenseByCategory(String phone, int month, int year) {
         SQLiteDatabase db = this.getReadableDatabase();
         HashMap<String, Double> expenseByCategory = new HashMap<>();
@@ -324,8 +403,6 @@ public class FinancialDB extends SQLiteOpenHelper {
         return expenseByCategory;
     }
 
-
-    // Get total spending (expenses) for a specific payment method
     public double getSpendingForMode(String paymentMode, String phone, int month, int year) {
         SQLiteDatabase db = this.getReadableDatabase();
         double totalSpending = 0;
@@ -348,7 +425,6 @@ public class FinancialDB extends SQLiteOpenHelper {
         return totalSpending;
     }
 
-    // Get total income for a specific payment method
     public double getIncomeForMode(String paymentMode, String phone, int month, int year) {
         SQLiteDatabase db = this.getReadableDatabase();
         double totalIncome = 0;
@@ -371,7 +447,6 @@ public class FinancialDB extends SQLiteOpenHelper {
         return totalIncome;
     }
 
-    // Get total transfers between two accounts
     public double getTransfersForMode(String transferMode, String phone, int month, int year) {
         SQLiteDatabase db = this.getReadableDatabase();
         double totalTransfers = 0;
@@ -393,7 +468,7 @@ public class FinancialDB extends SQLiteOpenHelper {
                     + COLUMN_PHONE + " = ? AND substr(" + COLUMN_DATE + ", 4, 2) = ? AND substr(" + COLUMN_DATE + ", 7, 4) = ?";
             args = new String[]{phone, monthStr, yearStr};
         } else {
-            return totalTransfers; // Return 0 if the transfer mode is invalid
+            return totalTransfers;
         }
 
         Cursor cursor = db.rawQuery(query, args);
@@ -408,7 +483,6 @@ public class FinancialDB extends SQLiteOpenHelper {
     }
 
 
-    // Get total number of transactions for a specific month/year
     public int getNumberOfTransactions(String phone, int month, int year) {
         SQLiteDatabase db = this.getReadableDatabase();
         int numberOfTransactions = 0;
@@ -430,7 +504,6 @@ public class FinancialDB extends SQLiteOpenHelper {
         return numberOfTransactions;
     }
 
-    // Get average spending for a specific month/year
     public double getAverageSpending(String phone, int month, int year) {
         SQLiteDatabase db = this.getReadableDatabase();
         double averageSpending = 0;
@@ -445,7 +518,6 @@ public class FinancialDB extends SQLiteOpenHelper {
         return averageSpending;
     }
 
-    // Get spending per day for a specific month/year
     public double getSpendingPerDay(String phone, int month, int year) {
         SQLiteDatabase db = this.getReadableDatabase();
         double totalSpending = getSpendingForMode("Cash", phone, month, year) + getSpendingForMode("Bank Account", phone, month, year);
@@ -455,7 +527,6 @@ public class FinancialDB extends SQLiteOpenHelper {
         return totalSpending / daysInMonth;
     }
 
-    // Get income per day for a specific month/year
     public double getIncomePerDay(String phone, int month, int year) {
         SQLiteDatabase db = this.getReadableDatabase();
         double totalIncome = getIncomeForMode("Cash", phone, month, year) + getIncomeForMode("Bank Account", phone, month, year);
@@ -465,7 +536,6 @@ public class FinancialDB extends SQLiteOpenHelper {
         return totalIncome / daysInMonth;
     }
 
-    // Get average income per transaction for a specific month/year
     public double getAverageIncomePerTransaction(String phone, int month, int year) {
         SQLiteDatabase db = this.getReadableDatabase();
         double totalIncome = getIncomeForMode("Cash", phone, month, year) + getIncomeForMode("Bank Account", phone, month, year);
@@ -478,7 +548,6 @@ public class FinancialDB extends SQLiteOpenHelper {
         return 0;
     }
 
-    // Helper method to calculate days in a month
     private int getDaysInMonth(int month, int year) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.MONTH, month - 1);
@@ -486,29 +555,22 @@ public class FinancialDB extends SQLiteOpenHelper {
         return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
     }
 
-    //fragment_account
-
     public double getTotal(String phone, boolean isBankAccount) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         double totalIncome = 0, totalExpense = 0, totalTransferTo = 0, totalTransferFrom = 0, totalAmount;
         String payType = isBankAccount ? "Bank Account" : "Cash";
 
-        // INCOME
         totalIncome = getTotalAmount(db, phone, COLUMN_INCOME_PAYMENT_METHOD, payType);
 
-        // EXPENSE
         totalExpense = getTotalAmount(db, phone, COLUMN_EXPENSE_PAYMENT_METHOD, payType);
 
-        // TRANSFER TO
         totalTransferTo = getTotalAmount(db, phone, COLUMN_FROM_ACCOUNT, payType);
 
-        // TRANSFER FROM
         totalTransferFrom = getTotalAmount(db, phone, COLUMN_TO_ACCOUNT, payType);
 
         db.close();
 
-        // Calculate total amount
         totalAmount = (totalIncome + totalTransferFrom) - (totalExpense + totalTransferTo);
 
         return totalAmount;

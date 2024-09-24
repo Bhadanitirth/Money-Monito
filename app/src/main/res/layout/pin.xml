@@ -38,11 +38,11 @@
             android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="30dp"
+            android:layout_margin="25dp"
             android:layout_below="@+id/text1"
-            android:layout_gravity="center"
             card_view:cardCornerRadius="30dp"
-            card_view:cardElevation="20dp">
+            card_view:cardElevation="20dp"
+            android:background="@drawable/edit_text_background">
 
         <RelativeLayout
                 android:layout_width="match_parent"

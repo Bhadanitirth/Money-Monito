@@ -19,12 +19,12 @@ public class AddTransaction extends Fragment {
 
     TabLayout tabLayout;
     ViewPager2 viewPager2;
-    com.example.login_signup.adapter.AddTransectionAdapter addTransectionAdapter;
+    AddTransectionAdapter addTransectionAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view= inflater.inflate(R.layout.fragment_add_transaction, container, false);
 
         tabLayout=view.findViewById(R.id.tabforadd);

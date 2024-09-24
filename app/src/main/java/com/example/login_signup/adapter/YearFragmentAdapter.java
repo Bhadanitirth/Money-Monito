@@ -14,11 +14,11 @@ public class YearFragmentAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        return Year4.newInstance(position); // Pass the year index
+        return Year4.newInstance(position);
     }
 
     @Override
     public int getItemCount() {
-        return 100; // 10 years
+        return 10;
     }
 }

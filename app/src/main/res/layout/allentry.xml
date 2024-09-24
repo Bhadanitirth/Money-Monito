@@ -21,28 +21,11 @@
         android:layout_below="@id/transaction"
         android:background="@drawable/edit_text_background"/>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/listcard"
-        android:layout_below="@+id/search_bar"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        card_view:cardCornerRadius="30dp"
-        card_view:cardElevation="10dp"
-        android:background="@drawable/edit_text_background">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/user_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/search_bar"
+                android:layout_marginTop="10dp" />
 
-        <RelativeLayout
-            android:id="@+id/list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp">
-
-    <ListView
-        android:id="@+id/user_list"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
 </RelativeLayout>

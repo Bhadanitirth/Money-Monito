@@ -22,23 +22,28 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.login_signup.Befor_Home;
+import com.example.login_signup.Before_Home;
 import com.example.login_signup.R;
 
 import com.example.login_signup.SQLiteDB.FinancialDB;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 
 public class Income extends Fragment {
 
-    private int pay_category_res = -1;
-    private int pay_img_res = -1;
+    String amount , note , date , time , fromAccount , toAccount , expenseCategory , incomeCategory , incomePaymentMethod , expensePaymentMethod ;
+    ArrayList<HashMap<String, String>> entryList;
 
+
+
+    String id;
     String phone;
     SharedPreferences sdp;
     ImageView pay_img,selectedCategoryImageView;
-    private EditText pay_edittext,datePickerEditText, timePickerEditText,datePicker, timePicker, amountEditText, selectCategoryEditText, noteEditText, attachmentEditText;
+    private EditText pay_edittext,datePickerEditText, timePickerEditText, amountEditText, selectCategoryEditText, noteEditText, attachmentEditText;
     private FinancialDB dbHelper;
     private ImageButton saveButton;
 
@@ -64,47 +69,102 @@ public class Income extends Fragment {
             R.drawable.other, R.drawable.salary, R.drawable.sold, R.drawable.coupon
     };
 
+    public Income(String id) {
+        this.id=id;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view= inflater.inflate(R.layout.fragment_income, container, false);
 
         sdp = requireContext().getSharedPreferences("user_details", Context.MODE_PRIVATE);
         phone = sdp.getString("phone", "null");
 
-        datePicker = view.findViewById(R.id.date_picker);
-        timePicker = view.findViewById(R.id.time_picker);
+        datePickerEditText = view.findViewById(R.id.date_picker);
+        timePickerEditText = view.findViewById(R.id.time_picker);
         amountEditText = view.findViewById(R.id.Amount_No);
         noteEditText = view.findViewById(R.id.note);
         attachmentEditText = view.findViewById(R.id.Attachment);
         saveButton = view.findViewById(R.id.Save);
-
-        // Initialize database helper
-        dbHelper = new FinancialDB(getActivity());
-        saveButton.setOnClickListener(v -> {
-            saveIncomeData();
-            Intent intent = new Intent(getActivity(), Befor_Home.class);
-            startActivity(intent);
-        });
-
-        // Bottom add category
         selectCategoryEditText = view.findViewById(R.id.Select_Category);
-        selectedCategoryImageView = view.findViewById(R.id.selected_category_image);
-        selectCategoryEditText.setOnClickListener(v -> showCategoryDialog());
-
-        // Bottom add category Pay Type
         pay_edittext= view.findViewById(R.id.pay_text);
+        selectedCategoryImageView = view.findViewById(R.id.selected_category_image);
         pay_img= view.findViewById(R.id.pay_img);
-        pay_edittext.setOnClickListener(v -> showBankAccDialog());
 
-        // Date and time pickers
-        datePickerEditText = view.findViewById(R.id.date_picker);
-        timePickerEditText = view.findViewById(R.id.time_picker);
-        initializeDateAndTime();
+        dbHelper = new FinancialDB(getActivity());
 
-        datePickerEditText.setOnClickListener(v -> showDatePicker());
-        timePickerEditText.setOnClickListener(v -> showTimePicker());
+        if(id.equals("-1")) {
+
+            selectCategoryEditText.setOnClickListener(v -> showCategoryDialog());
+
+            pay_edittext.setOnClickListener(v -> showBankAccDialog());
+
+            initializeDateAndTime();
+
+            datePickerEditText.setOnClickListener(v -> showDatePicker());
+            timePickerEditText.setOnClickListener(v -> showTimePicker());
+
+            saveButton.setOnClickListener(v -> {
+                saveIncomeData();
+                Intent intent = new Intent(getActivity(), Before_Home.class);
+                startActivity(intent);
+            });
+
+        }else{
+
+            entryList = dbHelper.getData(id);
+
+            for (HashMap<String, String> entry : entryList) {
+
+                amount = entry.get("amount");
+                note = entry.get("note");
+                date = entry.get("date");
+                time = entry.get("time");
+                fromAccount = entry.get("from_account");
+                toAccount = entry.get("to_account");
+                expenseCategory = entry.get("expense_category");
+                incomeCategory = entry.get("income_category");
+                incomePaymentMethod = entry.get("income_payment_method");
+                expensePaymentMethod = entry.get("expense_payment_method");
+
+            }
+            datePickerEditText.setText(date);
+            timePickerEditText.setText(time);
+            amountEditText.setText(amount);
+            noteEditText.setText(note);
+            selectCategoryEditText.setText(incomeCategory);
+            pay_edittext.setText(incomePaymentMethod);
+
+            for (int i = 0; i < categoryIds.length; i++) {
+                if(incomeCategory.equals(categoryNames[i]))
+                {
+                    selectedCategoryImageView.setImageResource(categoryImages[i]);
+                }
+            }
+
+            for (int i = 0; i < payIds.length; i++) {
+                int index = i;
+                if(incomePaymentMethod.equals(payNames[index]))
+                {
+                    pay_img.setImageResource(payImages[index]);
+                }
+            }
+
+            selectCategoryEditText.setOnClickListener(v -> showCategoryDialog());
+
+            pay_edittext.setOnClickListener(v -> showBankAccDialog());
+
+            datePickerEditText.setOnClickListener(v -> showDatePicker());
+            timePickerEditText.setOnClickListener(v -> showTimePicker());
+
+            saveButton.setOnClickListener(v -> {
+                updateIncome(id);
+            });
+
+
+        }
 
         return view;
     }
@@ -114,16 +174,16 @@ public class Income extends Fragment {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.bottom_add_cash_bank_acc);
 
-        // Set click listeners dynamically
+
         for (int i = 0; i < payIds.length; i++) {
-            int index = i; // Capture the index in a final variable
+            int index = i;
             dialog.findViewById(payIds[i]).setOnClickListener(v -> {
                 pay_edittext.setText(payNames[index]);
                 pay_img.setImageResource(payImages[index]);
 
-                pay_img_res = payImages[index];
 
-                dialog.dismiss(); // Close the dialog
+
+                dialog.dismiss();
             });
         }
 
@@ -142,16 +202,13 @@ public class Income extends Fragment {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.bottom_add_layout_income);
 
-        // Set click listeners dynamically
         for (int i = 0; i < categoryIds.length; i++) {
-            int index = i; // Capture the index in a final variable
+            int index = i;
             dialog.findViewById(categoryIds[i]).setOnClickListener(v -> {
                 selectCategoryEditText.setText(categoryNames[index]);
                 selectedCategoryImageView.setImageResource(categoryImages[index]);
 
-                pay_category_res = categoryImages[index];
-
-                dialog.dismiss(); // Close the dialog
+                dialog.dismiss();
             });
         }
 
@@ -197,7 +254,7 @@ public class Income extends Fragment {
                 },
                 hour,
                 minute,
-                true // 24-hour format
+                true
         );
         timePickerDialog.show();
     }
@@ -205,7 +262,6 @@ public class Income extends Fragment {
     private void initializeDateAndTime() {
         Calendar calendar = Calendar.getInstance();
 
-        // Set default date and time in EditTexts
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -219,8 +275,8 @@ public class Income extends Fragment {
     }
 
     private void saveIncomeData() {
-        String date = datePicker.getText().toString();
-        String time = timePicker.getText().toString();
+        String date = datePickerEditText.getText().toString();
+        String time = timePickerEditText.getText().toString();
         String amountString = amountEditText.getText().toString();
         String category = selectCategoryEditText.getText().toString();
         String paymentMethod = pay_edittext.getText().toString();
@@ -241,4 +297,40 @@ public class Income extends Fragment {
             Toast.makeText(getContext(), "Error saving income.", Toast.LENGTH_SHORT).show();
         }
     }
+
+    private void updateIncome(String incomeId) {
+        int incomeIdInt = Integer.parseInt(incomeId);
+        String date = datePickerEditText.getText().toString();
+        String time = timePickerEditText.getText().toString();
+        String amountStr = amountEditText.getText().toString();
+        String category = selectCategoryEditText.getText().toString();
+        String paymentMethod = pay_edittext.getText().toString();
+        String note = noteEditText.getText().toString();
+        String attachment = attachmentEditText.getText().toString(); // Optional field
+
+        // Validate fields
+        if (date.isEmpty() || time.isEmpty() || amountStr.isEmpty() || category.isEmpty() || paymentMethod.isEmpty()) {
+            Toast.makeText(requireContext(), "Please fill in all required fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        double amount = Double.parseDouble(amountStr);
+
+        // Update the income in the database with type "income"
+        String type = "income";
+
+        int result = dbHelper.updateList(incomeIdInt, date, time, amount, category, paymentMethod, note, attachment, type);
+
+        if (result > 0) {
+            Toast.makeText(requireContext(), "Income updated successfully", Toast.LENGTH_SHORT).show();
+
+            // Navigate back to the desired screen
+            Intent intent = new Intent(getActivity(), Before_Home.class);
+            startActivity(intent);
+
+        } else {
+            Toast.makeText(requireContext(), "Failed to update income", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

@@ -22,20 +22,23 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.login_signup.Befor_Home;
+import com.example.login_signup.Before_Home;
 import com.example.login_signup.R;
 import com.example.login_signup.SQLiteDB.FinancialDB;
 
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class Transfer extends Fragment {
 
-    String phone;
+    String amount , note , date , time , fromAccount , toAccount , expenseCategory , incomeCategory , incomePaymentMethod , expensePaymentMethod ;
+
+    String phone,id;
+    ArrayList<HashMap<String, String>> entryList;
     SharedPreferences sdp;
 
-    private int pay_img_from_res = -1;
-    private int pay_img_to_res = -1;
 
     ImageView pay_img_from,getPay_img_to;
     EditText pay_from,pay_to;
@@ -51,54 +54,97 @@ public class Transfer extends Fragment {
     };
 
 //    batabase
-    private EditText datePickerEditText, timePickerEditText,datePicker, timePicker, amountNo, note, attachment;
+    private EditText datePickerEditText, timePickerEditText, amountEditText, noteEditText, attachment;
     private FinancialDB dbHelper;
     ImageButton saveButton;
+
+    public Transfer(String id) {
+        this.id=id;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_transfer, container, false);
 
         sdp = requireContext().getSharedPreferences("user_details", Context.MODE_PRIVATE);
         phone = sdp.getString("phone", "null");
 
-        // Initialize UI components
-        datePicker = view.findViewById(R.id.date_picker);
-        timePicker = view.findViewById(R.id.time_picker);
-        amountNo = view.findViewById(R.id.Amount_No);
-        note = view.findViewById(R.id.note);
-        attachment = view.findViewById(R.id.Attachment);
-        saveButton = view.findViewById(R.id.Save);
-
-        // Bottom add category Pay Type
-        pay_from= view.findViewById(R.id.pay_textform);
-        pay_img_from= view.findViewById(R.id.pay_imgfrom);
-        pay_from.setOnClickListener(v -> showBankAccDialog_from());
-
-        // Bottom add category Pay Type
-        pay_to= view.findViewById(R.id.pay_textto);
-        getPay_img_to= view.findViewById(R.id.pay_imgto);
-        pay_to.setOnClickListener(v -> showBankAccDialog_to());
-
-        // Initialize database helper
-        dbHelper = new FinancialDB(getContext());
-
-        saveButton.setOnClickListener(v -> {
-            saveTransferDetails();
-            Intent intent = new Intent(getActivity(), Befor_Home.class);
-            startActivity(intent);
-        });
-
-        // Date and time pickers
         datePickerEditText = view.findViewById(R.id.date_picker);
         timePickerEditText = view.findViewById(R.id.time_picker);
-        initializeDateAndTime();
+        amountEditText = view.findViewById(R.id.Amount_No);
+        noteEditText = view.findViewById(R.id.note);
+        attachment = view.findViewById(R.id.Attachment);
+        saveButton = view.findViewById(R.id.Save);
+        pay_to= view.findViewById(R.id.pay_textto);
+        getPay_img_to= view.findViewById(R.id.pay_imgto);
+        pay_from= view.findViewById(R.id.pay_textform);
+        pay_img_from= view.findViewById(R.id.pay_imgfrom);
 
-        datePickerEditText.setOnClickListener(v -> showDatePicker());
-        timePickerEditText.setOnClickListener(v -> showTimePicker());
+        dbHelper = new FinancialDB(getContext());
 
+        if(id.equals("-1")) {
+            pay_from.setOnClickListener(v -> showBankAccDialog_from());
+
+            pay_to.setOnClickListener(v -> showBankAccDialog_to());
+
+            initializeDateAndTime();
+
+            datePickerEditText.setOnClickListener(v -> showDatePicker());
+            timePickerEditText.setOnClickListener(v -> showTimePicker());
+
+            saveButton.setOnClickListener(v -> {
+                saveTransferDetails();
+            });
+        }else {
+            entryList = dbHelper.getData(id);
+
+            for (HashMap<String, String> entry : entryList) {
+
+                amount = entry.get("amount");
+                note = entry.get("note");
+                date = entry.get("date");
+                time = entry.get("time");
+                fromAccount = entry.get("from_account");
+                toAccount = entry.get("to_account");
+                expenseCategory = entry.get("expense_category");
+                incomeCategory = entry.get("income_category");
+                incomePaymentMethod = entry.get("income_payment_method");
+                expensePaymentMethod = entry.get("expense_payment_method");
+
+            }
+            datePickerEditText.setText(date);
+            timePickerEditText.setText(time);
+            amountEditText.setText(amount);
+            noteEditText.setText(note);
+            pay_to.setText(toAccount);
+            pay_from.setText(fromAccount);
+
+            for (int i = 0; i < payIds.length; i++) {
+                if(toAccount.equals(payNames[i]))
+                {
+                    getPay_img_to.setImageResource(payImages[i]);
+                }
+            }
+            for (int i = 0; i < payIds.length; i++) {
+                if(fromAccount.equals(payNames[i]))
+                {
+                    pay_img_from.setImageResource(payImages[i]);
+                }
+            }
+            pay_from.setOnClickListener(v -> showBankAccDialog_from());
+
+            pay_to.setOnClickListener(v -> showBankAccDialog_to());
+
+            datePickerEditText.setOnClickListener(v -> showDatePicker());
+            timePickerEditText.setOnClickListener(v -> showTimePicker());
+
+            saveButton.setOnClickListener(v -> {
+                updateTransfer(id);
+            });
+
+
+        }
     return view;
     }
 
@@ -107,16 +153,13 @@ public class Transfer extends Fragment {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.bottom_add_cash_bank_acc);
 
-        // Set click listeners dynamically
         for (int i = 0; i < payIds.length; i++) {
-            int index = i; // Capture the index in a final variable
+            int index = i;
             dialog.findViewById(payIds[i]).setOnClickListener(v -> {
                 pay_from.setText(payNames[index]);
                 pay_img_from.setImageResource(payImages[index]);
 
-                pay_img_from_res = payImages[index];
-
-                dialog.dismiss(); // Close the dialog
+                dialog.dismiss();
             });
         }
 
@@ -135,16 +178,14 @@ public class Transfer extends Fragment {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.bottom_add_cash_bank_acc);
 
-        // Set click listeners dynamically
+
         for (int i = 0; i < payIds.length; i++) {
-            int index = i; // Capture the index in a final variable
+            int index = i;
             dialog.findViewById(payIds[i]).setOnClickListener(v -> {
                 pay_to.setText(payNames[index]);
                 getPay_img_to.setImageResource(payImages[index]);
 
-                pay_img_to_res = payImages[index];
-
-                dialog.dismiss(); // Close the dialog
+                dialog.dismiss();
             });
         }
 
@@ -190,7 +231,7 @@ public class Transfer extends Fragment {
                 },
                 hour,
                 minute,
-                true // 24-hour format
+                true
         );
         timePickerDialog.show();
     }
@@ -198,7 +239,6 @@ public class Transfer extends Fragment {
     private void initializeDateAndTime() {
         Calendar calendar = Calendar.getInstance();
 
-        // Set default date and time in EditTexts
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -212,12 +252,12 @@ public class Transfer extends Fragment {
     }
 
     private void saveTransferDetails() {
-        String date = datePicker.getText().toString().trim();
-        String time = timePicker.getText().toString().trim();
-        String amountStr = amountNo.getText().toString().trim();
+        String date = datePickerEditText.getText().toString().trim();
+        String time = timePickerEditText.getText().toString().trim();
+        String amountStr = amountEditText.getText().toString().trim();
         String fromAccount = pay_from.getText().toString().trim();
         String toAccount = pay_to.getText().toString().trim();
-        String noteText = note.getText().toString().trim();
+        String noteText = noteEditText.getText().toString().trim();
         String attachmentText = attachment.getText().toString().trim();
 
         if (date.isEmpty() || time.isEmpty() || amountStr.isEmpty() || fromAccount.isEmpty() || toAccount.isEmpty()) {
@@ -231,9 +271,39 @@ public class Transfer extends Fragment {
 
         if (result != -1) {
             Toast.makeText(getContext(), "Transfer saved successfully", Toast.LENGTH_SHORT).show();
-
+            Intent intent = new Intent(getActivity(), Before_Home.class);
+            startActivity(intent);
         } else {
             Toast.makeText(getContext(), "Failed to save transfer", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void updateTransfer(String transferId) {
+        int transferIdInt = Integer.parseInt(transferId);
+        String date = datePickerEditText.getText().toString();
+        String time = timePickerEditText.getText().toString();
+        String amountStr = amountEditText.getText().toString();
+        String fromAccount = pay_from.getText().toString();
+        String toAccount = pay_to.getText().toString();
+        String noteText = noteEditText.getText().toString();
+        String attachmentText = attachment.getText().toString();
+        String type = "Transfer";
+
+        if (date.isEmpty() || time.isEmpty() || amountStr.isEmpty() || fromAccount.isEmpty() || toAccount.isEmpty()) {
+            Toast.makeText(getContext(), "Please fill in all required fields.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        double amount = Double.parseDouble(amountStr);
+
+        int result = dbHelper.updateList(transferIdInt, date, time, amount, fromAccount, toAccount, noteText, attachmentText, type);
+
+        if (result > 0) {
+            Toast.makeText(getContext(), "Transfer updated successfully", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getActivity(), Before_Home.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(getContext(), "Failed to update transfer", Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -47,7 +47,7 @@
                     card_view:cardCornerRadius="30dp"
                     card_view:cardElevation="10dp"
                     android:background="@drawable/edit_text_background"
-                    card_view:cardBackgroundColor="@color/green">
+                    card_view:cardBackgroundColor="@color/red">
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
                             android:layout_width="40dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="5dp"
-                            android:src="@drawable/inc"/>
+                            android:src="@drawable/up"/>
                         <TextView
                             android:id="@+id/spendingText"
                             android:layout_width="wrap_content"
@@ -94,7 +94,7 @@
                     card_view:cardCornerRadius="30dp"
                     card_view:cardElevation="10dp"
                     android:background="@drawable/edit_text_background"
-                    card_view:cardBackgroundColor="@color/red">
+                    card_view:cardBackgroundColor="@color/green">
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
@@ -106,7 +106,7 @@
                             android:layout_width="40dp"
                             android:layout_height="50dp"
                             android:layout_marginTop="5dp"
-                            android:src="@drawable/dec"/>
+                            android:src="@drawable/down"/>
                         <TextView
                             android:id="@+id/incomeText"
                             android:layout_width="wrap_content"
@@ -197,7 +197,7 @@
                     android:textSize="16sp"
                     android:layout_marginTop="8dp" />
 
-                <!-- Round graph (Donut chart) -->
+                <!-- Round graph  -->
                 <com.github.mikephil.charting.charts.PieChart
                     android:layout_below="@id/category_wise_spending"
                     android:id="@+id/spending_pieChart"

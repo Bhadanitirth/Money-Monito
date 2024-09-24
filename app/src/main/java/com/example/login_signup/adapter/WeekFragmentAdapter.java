@@ -15,11 +15,11 @@ public class WeekFragmentAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        return Week4.newInstance(position); // Pass the day index
+        return Week4.newInstance(position);
     }
 
     @Override
     public int getItemCount() {
-        return 53; // 7 days of the week
+        return 53;
     }
 }

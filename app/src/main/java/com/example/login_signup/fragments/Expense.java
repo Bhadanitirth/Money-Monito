@@ -20,29 +20,32 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
-import com.example.login_signup.Befor_Home;
-import com.example.login_signup.LoginSignup.Pin;
+import com.example.login_signup.Before_Home;
+//import com.example.login_signup.Calculator;
 import com.example.login_signup.R;
 
 import com.example.login_signup.SQLiteDB.FinancialDB;
-import com.example.login_signup.allEntry;
 
+
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class Expense extends Fragment {
 
-    private ImageView pay_img, selectedCategoryImageView;
+    String amount , note , date , time , fromAccount , toAccount , expenseCategory , incomeCategory , incomePaymentMethod , expensePaymentMethod ;
 
-    private int pay_category_res = -1;
-    private int pay_img_res = -1;
+    ImageView pay_img, selectedCategoryImageView;
 
+
+    ArrayList<HashMap<String, String>> entryList;
+    String id;
     String phone;
     SharedPreferences sdp;
-    private ImageButton saveButton;
-    private FinancialDB dbHelper;
-    private EditText pay_edittext, selectCategoryEditText, datePickerEditText, timePickerEditText, amountEditText, noteEditText, attachmentEditText;
+    ImageButton saveButton;
+    FinancialDB dbHelper;
+    EditText pay_edittext, selectCategoryEditText, datePickerEditText, timePickerEditText, amountEditText, noteEditText, attachmentEditText;
 
     private final int[] payIds = {
             R.id.cash, R.id.bank_account
@@ -69,6 +72,10 @@ public class Expense extends Fragment {
             R.drawable.personal_care, R.drawable.gift_and_donation
     };
 
+    public Expense(String id) {
+        this.id = id;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -78,43 +85,97 @@ public class Expense extends Fragment {
         sdp = requireContext().getSharedPreferences("user_details", Context.MODE_PRIVATE);
         phone = sdp.getString("phone", "null");
 
-        // Initialize UI elements for database
         datePickerEditText = view.findViewById(R.id.date_picker);
         timePickerEditText = view.findViewById(R.id.time_picker);
         amountEditText = view.findViewById(R.id.Amount_No);
         noteEditText = view.findViewById(R.id.note);
         attachmentEditText = view.findViewById(R.id.Attachment);
         saveButton = view.findViewById(R.id.Save);
+        selectCategoryEditText = view.findViewById(R.id.Select_Category);
+        pay_edittext = view.findViewById(R.id.pay_text);
+        selectedCategoryImageView = view.findViewById(R.id.selected_category_image);
+        pay_img = view.findViewById(R.id.pay_img);
 
-        // Initialize database helper
         dbHelper = new FinancialDB(getActivity());
 
-        // Set onClickListener for Save button
-        saveButton.setOnClickListener(v -> {
+        if(id.equals("-1")) {
+            selectCategoryEditText.setOnClickListener(v -> showCategoryDialog());
 
-            saveExpense();
-            Intent intent = new Intent(getActivity(), Befor_Home.class);
-            startActivity(intent);
+            pay_edittext.setOnClickListener(v -> showBankAccDialog());
+
+            initializeDateAndTime();
+
+            datePickerEditText.setOnClickListener(v -> showDatePicker());
+            timePickerEditText.setOnClickListener(v -> showTimePicker());
+
+            saveButton.setOnClickListener(v -> {
+                saveExpense();
             });
+        }else {
+            entryList = dbHelper.getData(id);
 
-        // Bottom add category
-        selectCategoryEditText = view.findViewById(R.id.Select_Category);
-        selectedCategoryImageView = view.findViewById(R.id.selected_category_image);
-        selectCategoryEditText.setOnClickListener(v -> showCategoryDialog());
+            for (HashMap<String, String> entry : entryList) {
 
-        // Bottom add category Pay Type
-        pay_edittext = view.findViewById(R.id.pay_text);
-        pay_img = view.findViewById(R.id.pay_img);
-        pay_edittext.setOnClickListener(v -> showBankAccDialog());
+                 amount = entry.get("amount");
+                 note = entry.get("note");
+                 date = entry.get("date");
+                 time = entry.get("time");
+                 fromAccount = entry.get("from_account");
+                 toAccount = entry.get("to_account");
+                 expenseCategory = entry.get("expense_category");
+                 incomeCategory = entry.get("income_category");
+                 incomePaymentMethod = entry.get("income_payment_method");
+                 expensePaymentMethod = entry.get("expense_payment_method");
 
-        // Date and time pickers
-        datePickerEditText = view.findViewById(R.id.date_picker);
-        timePickerEditText = view.findViewById(R.id.time_picker);
-        initializeDateAndTime();
+            }
+                datePickerEditText.setText(date);
+                timePickerEditText.setText(time);
+                amountEditText.setText(amount);
+                noteEditText.setText(note);
+                selectCategoryEditText.setText(expenseCategory);
+                pay_edittext.setText(expensePaymentMethod);
 
-        datePickerEditText.setOnClickListener(v -> showDatePicker());
-        timePickerEditText.setOnClickListener(v -> showTimePicker());
+                for (int i = 0; i < categoryIds.length; i++) {
+                    if(expenseCategory.equals(categoryNames[i]))
+                    {
+                        selectedCategoryImageView.setImageResource(categoryImages[i]);
+                    }
+                }
 
+                for (int i = 0; i < payIds.length; i++) {
+                    int index = i;
+                    if(expensePaymentMethod.equals(payNames[index]))
+                    {
+                        pay_img.setImageResource(payImages[index]);
+                    }
+                }
+
+                selectCategoryEditText.setOnClickListener(v -> showCategoryDialog());
+
+                pay_edittext.setOnClickListener(v -> showBankAccDialog());
+
+                datePickerEditText.setOnClickListener(v -> showDatePicker());
+                timePickerEditText.setOnClickListener(v -> showTimePicker());
+
+                saveButton.setOnClickListener(v -> {
+                    updateExpense(id);
+                });
+
+
+        }
+
+//        amountEditText.setOnTouchListener((v, event) -> {
+//            final int DRAWABLE_END = 2; // index for the drawableEnd position
+//
+//            if (event.getAction() == MotionEvent.ACTION_UP) {
+//                if (event.getRawX() >= (amountEditText.getRight() - amountEditText.getCompoundDrawables()[DRAWABLE_END].getBounds().width())) {
+//                    // Open the calculator dialog
+//                    showCalculatorDialog();
+//                    return true;
+//                }
+//            }
+//            return false;
+//        });
 
         return view;
     }
@@ -125,16 +186,13 @@ public class Expense extends Fragment {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.bottom_add_cash_bank_acc);
 
-        // Set click listeners dynamically
         for (int i = 0; i < payIds.length; i++) {
-            int index = i; // Capture the index in a final variable
+            int index = i;
             dialog.findViewById(payIds[i]).setOnClickListener(v -> {
                 pay_edittext.setText(payNames[index]);
                 pay_img.setImageResource(payImages[index]);
 
-                pay_img_res = payImages[index];
-
-                dialog.dismiss(); // Close the dialog
+                dialog.dismiss();
             });
         }
 
@@ -154,16 +212,13 @@ public class Expense extends Fragment {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.bottom_add_layout_expense);
 
-        // Set click listeners dynamically
         for (int i = 0; i < categoryIds.length; i++) {
-            int index = i; // Capture the index in a final variable
+            int index = i;
             dialog.findViewById(categoryIds[i]).setOnClickListener(v -> {
                 selectCategoryEditText.setText(categoryNames[index]);
                 selectedCategoryImageView.setImageResource(categoryImages[index]);
 
-                pay_category_res = categoryImages[index];
-
-                dialog.dismiss(); // Close the dialog
+                dialog.dismiss();
             });
         }
 
@@ -210,7 +265,7 @@ public class Expense extends Fragment {
                 },
                 hour,
                 minute,
-                true // 24-hour format
+                true
         );
         timePickerDialog.show();
     }
@@ -218,7 +273,6 @@ public class Expense extends Fragment {
     private void initializeDateAndTime() {
         Calendar calendar = Calendar.getInstance();
 
-        // Set default date and time in EditTexts
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -232,7 +286,6 @@ public class Expense extends Fragment {
     }
 
     private void saveExpense() {
-
 
         String date = datePickerEditText.getText().toString();
         String time = timePickerEditText.getText().toString();
@@ -254,8 +307,62 @@ public class Expense extends Fragment {
         if (result != -1) {
             Toast.makeText(requireContext(), "Expense saved successfully", Toast.LENGTH_SHORT).show();
 
+            Intent intent = new Intent(getActivity(), Before_Home.class);
+            startActivity(intent);
+
         } else {
             Toast.makeText(requireContext(), "Failed to save expense", Toast.LENGTH_SHORT).show();
         }
     }
+
+    private void updateExpense(String expenseId) {
+
+        int expenseIdInt = Integer.parseInt(expenseId);
+        String date = datePickerEditText.getText().toString();
+        String time = timePickerEditText.getText().toString();
+        String amountStr = amountEditText.getText().toString();
+        String category = selectCategoryEditText.getText().toString();
+        String paymentMethod = pay_edittext.getText().toString();
+        String note = noteEditText.getText().toString();
+        String attachment = attachmentEditText.getText().toString(); // Optional field
+
+        // Validate fields
+        if (date.isEmpty() || time.isEmpty() || amountStr.isEmpty() || category.isEmpty() || paymentMethod.isEmpty()) {
+            Toast.makeText(requireContext(), "Please fill in all required fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        double amount = Double.parseDouble(amountStr);
+        String type="expense";
+
+        // Update the expense in the database
+        int result = dbHelper.updateList(expenseIdInt, date, time, amount, category, paymentMethod, note, attachment,type);
+
+        if (result > 0) {
+            Toast.makeText(requireContext(), "Expense updated successfully", Toast.LENGTH_SHORT).show();
+
+            // Navigate back to the desired screen
+            Intent intent = new Intent(getActivity(), Before_Home.class);
+            startActivity(intent);
+
+        } else {
+            Toast.makeText(requireContext(), "Failed to update expense", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+//    private void showCalculatorDialog() {
+//        final Dialog calculatorDialog = new Dialog(requireContext());
+//        calculatorDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        calculatorDialog.setContentView(R.layout.dialog_calculator);
+//        calculatorDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//
+//        // Pass the dialog's root view and the EditText where the result should be shown
+//        Calculator calculator = new Calculator(calculatorDialog.findViewById(android.R.id.content), amountEditText);
+//
+//        calculatorDialog.show();
+//    }
+
+
+
 }

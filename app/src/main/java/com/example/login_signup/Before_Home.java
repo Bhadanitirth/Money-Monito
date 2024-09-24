@@ -14,7 +14,7 @@ import com.example.login_signup.fragments.AnalisisFragment;
 import com.example.login_signup.fragments.HomeFragment;
 import com.example.login_signup.fragments.MoreFragment;
 
-public class Befor_Home extends AppCompatActivity {
+public class Before_Home extends AppCompatActivity {
 
     HomeActivityBinding binding;
 
@@ -26,7 +26,13 @@ public class Befor_Home extends AppCompatActivity {
         binding = HomeActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        replaceFragment(new HomeFragment());
+        int fragment = getIntent().getIntExtra("fragment", -1);
+        if(fragment == 4)
+        {
+            replaceFragment(new MoreFragment());
+        }else {
+            replaceFragment(new HomeFragment());
+        }
 
         binding.bottomNavigationView.setBackground(null);
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {

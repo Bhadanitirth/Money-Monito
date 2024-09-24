@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.login_signup.Befor_Home;
+import com.example.login_signup.Before_Home;
 import com.example.login_signup.R;
 import com.example.login_signup.SQLiteDB.Login_Signin_Db;
 
@@ -110,7 +110,7 @@ public class Pin extends AppCompatActivity {
                 if (s.length() == 4) {
                     String enteredPin = s.toString();
                     if (isValidPin(enteredPin,phone)) {
-                        Intent intent = new Intent(Pin.this, Befor_Home.class);
+                        Intent intent = new Intent(Pin.this, Before_Home.class);
                         startActivity(intent);
                         finish();
                     } else {

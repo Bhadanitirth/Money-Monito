@@ -1,21 +1,26 @@
 package com.example.login_signup.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.login_signup.ListUpdate;
+import com.example.login_signup.Premium;
 import com.example.login_signup.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CustomAdapter extends BaseAdapter implements Filterable {
+public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> implements Filterable {
 
     private final Context context;
     private ArrayList<HashMap<String, String>> originalData;
@@ -52,76 +57,77 @@ public class CustomAdapter extends BaseAdapter implements Filterable {
         this.filteredData = new ArrayList<>(data);
     }
 
+    @NonNull
     @Override
-    public int getCount() {
-        return filteredData.size();
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.list_view, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public Object getItem(int position) {
-        return filteredData.get(position);
-    }
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        HashMap<String, String> item = filteredData.get(position);
 
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        if (convertView == null) {
-            LayoutInflater inflater = LayoutInflater.from(context);
-            convertView = inflater.inflate(R.layout.list_view, parent, false);
-        }
-
-        ImageView itemImage = convertView.findViewById(R.id.image_expense_cat);
-        ImageView payImage = convertView.findViewById(R.id.paytype_img);
-        TextView itemAmount = convertView.findViewById(R.id.amount);
-        TextView itemNote = convertView.findViewById(R.id.note);
-        TextView date = convertView.findViewById(R.id.date);
-
-        HashMap<String, String> item = filteredData.get(position); // Use filteredData here
-
-        itemAmount.setText(item.get("amount"));
-        itemNote.setText(item.get("note"));
-        date.setText(item.get("date"));
+        holder.itemAmount.setText(item.get("amount"));
+        holder.itemNote.setText(item.get("note"));
+        holder.date.setText(item.get("date"));
 
         String category_expense = item.get("expense_category");
         if (category_expense != null) {
             int imageResource = getCategoryImageResourceExpense(category_expense);
-            itemImage.setImageResource(imageResource);
+            holder.itemImage.setImageResource(imageResource);
         } else {
-            itemImage.setImageResource(R.drawable.other);
+            holder.itemImage.setImageResource(R.drawable.other);
         }
 
         String category_income = item.get("income_category");
         if (category_income != null) {
             int imageResource = getCategoryImageResourceIncome(category_income);
-            itemImage.setImageResource(imageResource);
+            holder.itemImage.setImageResource(imageResource);
         }
 
         String pay_type = item.get("expense_payment_method");
         if (pay_type != null) {
             int imageResource = getImageResourceIncome(pay_type);
-            payImage.setImageResource(imageResource);
+            holder.payImage.setImageResource(imageResource);
         } else {
-            payImage.setImageResource(R.drawable.other);
+            holder.payImage.setImageResource(R.drawable.other);
         }
 
         pay_type = item.get("income_payment_method");
         if (pay_type != null) {
             int imageResource = getImageResourceIncome(pay_type);
-            payImage.setImageResource(imageResource);
+            holder.payImage.setImageResource(imageResource);
         }
 
         String fromAccount = item.get("from_account");
         if (fromAccount != null) {
             int imageResource = getImageResourceIncome(fromAccount);
-            payImage.setImageResource(imageResource);
-            itemImage.setImageResource(R.drawable.transfer);
+            holder.payImage.setImageResource(imageResource);
+            holder.itemImage.setImageResource(R.drawable.transfer);
         }
 
-        return convertView;
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ListUpdate.class);
+            intent.putExtra("id", item.get("id"));
+            intent.putExtra("amount", item.get("amount"));
+            intent.putExtra("note", item.get("note"));
+            intent.putExtra("date", item.get("date"));
+            intent.putExtra("type", item.get("type"));
+            intent.putExtra("time", item.get("time"));
+            intent.putExtra("from_account", item.get("from_account"));
+            intent.putExtra("to_account", item.get("to_account"));
+            intent.putExtra("expense_category", item.get("expense_category"));
+            intent.putExtra("income_category", item.get("income_category"));
+            intent.putExtra("income_payment_method", item.get("income_payment_method"));
+            intent.putExtra("expense_payment_method", item.get("expense_payment_method"));
+            context.startActivity(intent);
+        });
+    }
+
+    @Override
+    public int getItemCount() {
+        return filteredData.size();
     }
 
     @Override
@@ -135,7 +141,7 @@ public class CustomAdapter extends BaseAdapter implements Filterable {
                 return expenseCategoryImages[i];
             }
         }
-        return R.drawable.other; // Placeholder image if category not found
+        return R.drawable.other;
     }
 
     private int getCategoryImageResourceIncome(String category) {
@@ -144,7 +150,7 @@ public class CustomAdapter extends BaseAdapter implements Filterable {
                 return incomeCategoryImages[i];
             }
         }
-        return R.drawable.other; // Placeholder image if category not found
+        return R.drawable.other;
     }
 
     private int getImageResourceIncome(String category) {
@@ -153,11 +159,10 @@ public class CustomAdapter extends BaseAdapter implements Filterable {
                 return PaymentMethodImages[i];
             }
         }
-        return R.drawable.other; // Placeholder image if category not found
+        return R.drawable.other;
     }
 
     private class ItemFilter extends Filter {
-
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
@@ -190,6 +195,20 @@ public class CustomAdapter extends BaseAdapter implements Filterable {
             filteredData.clear();
             filteredData.addAll((ArrayList<HashMap<String, String>>) results.values);
             notifyDataSetChanged();
+        }
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView itemImage, payImage;
+        TextView itemAmount, itemNote, date;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            itemImage = itemView.findViewById(R.id.image_expense_cat);
+            payImage = itemView.findViewById(R.id.paytype_img);
+            itemAmount = itemView.findViewById(R.id.amount);
+            itemNote = itemView.findViewById(R.id.note);
+            date = itemView.findViewById(R.id.date);
         }
     }
 }
