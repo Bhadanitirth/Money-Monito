@@ -11,24 +11,24 @@ import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.login_signup.Before_Home;
 import com.example.login_signup.R;
 import com.example.login_signup.SQLiteDB.Login_Signin_Db;
+import com.google.android.material.snackbar.Snackbar;
 
 public class Pin extends AppCompatActivity {
 
     EditText editTextPin;
-    TextView forgetPin ,sdp_text;
+    TextView forgetPin, sdp_text;
     Button[] numberButtons = new Button[10];
     ImageButton clearTextButton;
     GridLayout numberGridLayout;
     StringBuilder pinBuilder = new StringBuilder();
     Login_Signin_Db dbHelper;
-    TextView switchUser ;
+    TextView switchUser;
     SharedPreferences sdp;
     String phone;
 
@@ -37,8 +37,12 @@ public class Pin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pin);
 
-        sdp_text=findViewById(R.id.sdptxt);
-        sdp = getSharedPreferences("user_details",MODE_PRIVATE);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+
+        sdp_text = findViewById(R.id.sdptxt);
+        sdp = getSharedPreferences("user_details", MODE_PRIVATE);
         phone = sdp.getString("phone", "null");
         sdp_text.setText(phone);
 
@@ -86,7 +90,6 @@ public class Pin extends AppCompatActivity {
             }
         });
 
-
         forgetPin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -109,25 +112,21 @@ public class Pin extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if (s.length() == 4) {
                     String enteredPin = s.toString();
-                    if (isValidPin(enteredPin,phone)) {
+                    if (isValidPin(enteredPin, phone)) {
                         Intent intent = new Intent(Pin.this, Before_Home.class);
                         startActivity(intent);
                         finish();
                     } else {
-
-                        Toast.makeText(Pin.this, "Incorrect PIN", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(findViewById(android.R.id.content), "Incorrect PIN", Snackbar.LENGTH_SHORT).show();
                         editTextPin.setText("");
-
                     }
                 }
             }
         });
     }
 
-    private boolean isValidPin(String pin,String phone) {
-        Boolean storedPin = dbHelper.getStoredPin(pin,phone); // Assuming you have a method to get stored PIN
+    private boolean isValidPin(String pin, String phone) {
+        Boolean storedPin = dbHelper.getStoredPin(pin, phone); // Assuming you have a method to get stored PIN
         return storedPin;
     }
 }
-
-

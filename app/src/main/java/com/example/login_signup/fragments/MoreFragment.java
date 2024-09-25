@@ -1,6 +1,8 @@
 package com.example.login_signup.fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -67,17 +69,32 @@ public class MoreFragment extends Fragment {
             name.setText(String.format(firstName));
         }
 
-            logout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    SharedPreferences.Editor editor = sdp.edit();
-                    editor.clear();
-                    editor.commit();
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-                    intent=new Intent(getActivity(), Login.class);
-                    startActivity(intent);
-                }
-            });
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("Logout Confirmation")
+                        .setMessage("Are you sure you want to log out?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                SharedPreferences.Editor editor = sdp.edit();
+                                editor.clear();
+                                editor.commit();
+
+
+                                intent = new Intent(getActivity(), Login.class);
+                                startActivity(intent);
+
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+            }
+        });
+
 
         Transaction_card.setOnClickListener(new View.OnClickListener() {
             @Override

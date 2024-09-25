@@ -7,12 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.login_signup.R;
 import com.example.login_signup.SQLiteDB.Login_Signin_Db;
+import com.google.android.material.snackbar.Snackbar;
 
 public class ResetPasswordActivity extends AppCompatActivity {
 
@@ -28,11 +28,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_password);
 
-
-        editTextPhone=findViewById(R.id.textid);
-        sdp = getSharedPreferences("user_details",MODE_PRIVATE);
-        editTextPhone.setText(sdp.getString("phone",null));
-
+        editTextPhone = findViewById(R.id.textid);
+        sdp = getSharedPreferences("user_details", MODE_PRIVATE);
+        editTextPhone.setText(sdp.getString("phone", null));
 
         editTextOtp = findViewById(R.id.otp);
         editTextNewPassword = findViewById(R.id.editTextNewPassword);
@@ -41,21 +39,22 @@ public class ResetPasswordActivity extends AppCompatActivity {
 
         dbHelper = new Login_Signin_Db(this);
 
-        go_back=findViewById(R.id.back);
+        go_back = findViewById(R.id.back);
         go_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                intent=new Intent(ResetPasswordActivity.this, Login.class);
+                intent = new Intent(ResetPasswordActivity.this, Login.class);
                 startActivity(intent);
                 finish();
             }
         });
+
         buttonGetOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String phone = editTextPhone.getText().toString();
-                // OTP sending later
-                Toast.makeText(ResetPasswordActivity.this, "OTP sent to " + phone, Toast.LENGTH_SHORT).show();
+                // OTP sending logic will go here
+                Snackbar.make(findViewById(android.R.id.content), "OTP sent to " + phone, Snackbar.LENGTH_SHORT).show();
             }
         });
 
@@ -66,14 +65,13 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 String otp = editTextOtp.getText().toString();
                 String newPassword = editTextNewPassword.getText().toString();
 
-
                 if (dbHelper.verifyOtpAndResetPassword(phone, otp, newPassword)) {
-                    Toast.makeText(ResetPasswordActivity.this, "Password reset successfully!", Toast.LENGTH_SHORT).show();
-                    intent=new Intent(ResetPasswordActivity.this,Login.class);
+                    Snackbar.make(findViewById(android.R.id.content), "Password reset successfully!", Snackbar.LENGTH_SHORT).show();
+                    intent = new Intent(ResetPasswordActivity.this, Login.class);
                     startActivity(intent);
                     finish();
                 } else {
-                    Toast.makeText(ResetPasswordActivity.this, "Password reset unsuccessfully!", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(findViewById(android.R.id.content), "Password reset unsuccessfully!", Snackbar.LENGTH_SHORT).show();
                 }
             }
         });

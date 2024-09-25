@@ -224,13 +224,35 @@
         android:gravity="end"
         android:layout_margin="10dp"/>
 
+        <RelativeLayout
+            android:id="@+id/user_list_lay"
+            android:layout_below="@id/seeAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/user_list"
-            android:layout_below="@id/seeAll"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/empty_list"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"/>
+
+        <TextView
+            android:id="@+id/no_data_txt"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            />
+            android:layout_centerHorizontal="true"
+            android:textSize="16dp"
+            android:layout_marginTop="150dp"/>
+
+        </RelativeLayout>
+
 
     <TextView
         android:id="@+id/your_dudget"
@@ -238,7 +260,7 @@
         android:layout_height="wrap_content"
         android:text="Your budgets"
         android:layout_margin="10dp"
-        android:layout_below="@+id/user_list"
+        android:layout_below="@+id/user_list_lay"
         android:textSize="20dp" />
 
     <androidx.cardview.widget.CardView
@@ -260,23 +282,30 @@
                android:id="@+id/title"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:text=""
+               android:text="null"
                android:textSize="25dp"
                android:textStyle="bold"/>
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/month_budget_pieChart"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="10dp"/>
 
             <TextView
                 android:id="@+id/budget_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/title"
-                android:text=""
+                android:text="null"
                 android:textSize="16dp"/>
 
             <TextView
                 android:id="@+id/total_spent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="null"
                 android:layout_below="@id/budget_txt"
                 android:textSize="16dp"
                 android:layout_marginTop="20dp"/>
@@ -285,7 +314,7 @@
                 android:id="@+id/total_spent_amt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="null"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:layout_below="@id/total_spent"/>
@@ -294,7 +323,7 @@
                 android:id="@+id/ava_baudget"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="null"
                 android:textSize="16dp"
                 android:layout_below="@id/total_spent_amt"
                 android:layout_marginTop="20dp"/>
@@ -303,7 +332,7 @@
                 android:id="@+id/ava_baudget_amt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="null"
                 android:textStyle="bold"
                 android:layout_below="@id/ava_baudget"
                 android:textSize="20dp"/>
