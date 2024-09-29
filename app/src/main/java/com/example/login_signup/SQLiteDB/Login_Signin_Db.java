@@ -177,4 +177,21 @@ public class Login_Signin_Db extends SQLiteOpenHelper {
         return gender;
     }
 
+    public int DeleteAccount(String phone,Context context) {
+
+        FinancialDB financialDB=new FinancialDB(context);
+        financialDB.DeleteAccount(phone);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String selection = COLUMN_PHONE + " = ?";
+
+        String[] selectionArgs = { phone };
+
+        int deletedRows = db.delete(TABLE_USERS, selection, selectionArgs);
+
+        db.close();
+        return deletedRows;
+    }
+
 }
