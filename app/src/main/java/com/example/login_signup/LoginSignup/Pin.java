@@ -61,8 +61,10 @@ public class Pin extends AppCompatActivity {
             numberButtons[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    pinBuilder.append(digit);
-                    editTextPin.setText(pinBuilder.toString());
+                    if (pinBuilder.length() < 4) {
+                        pinBuilder.append(digit);
+                        editTextPin.setText(pinBuilder.toString());
+                    }
                 }
             });
         }
@@ -73,6 +75,7 @@ public class Pin extends AppCompatActivity {
                 if (pinBuilder.length() > 0) {
                     pinBuilder.deleteCharAt(pinBuilder.length() - 1);
                     editTextPin.setText(pinBuilder.toString());
+
                 }
             }
         });
@@ -126,7 +129,7 @@ public class Pin extends AppCompatActivity {
     }
 
     private boolean isValidPin(String pin, String phone) {
-        Boolean storedPin = dbHelper.getStoredPin(pin, phone); // Assuming you have a method to get stored PIN
+        Boolean storedPin = dbHelper.getStoredPin(pin, phone);
         return storedPin;
     }
 }
