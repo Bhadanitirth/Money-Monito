@@ -74,7 +74,7 @@ public class SignUp extends AppCompatActivity {
             if (TextUtils.isEmpty(firstName) || TextUtils.isEmpty(surname) || TextUtils.isEmpty(phone) ||
                     TextUtils.isEmpty(password) || TextUtils.isEmpty(dob) || TextUtils.isEmpty(pin) ||
                     selectedGenderId == -1) {
-                Snackbar.make(findViewById(android.R.id.content), "Please fill in all fields", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(android.R.id.content), "Please fill in all fields ", Snackbar.LENGTH_SHORT).show();
                 return;
             }
 
