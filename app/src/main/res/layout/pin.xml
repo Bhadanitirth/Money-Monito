@@ -79,7 +79,7 @@
         android:layout_below="@id/editTextPin"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="Forget PIN?" />
+        android:text="Forget PIN? " />
 
     <GridLayout
         android:id="@+id/numberGridLayout"
