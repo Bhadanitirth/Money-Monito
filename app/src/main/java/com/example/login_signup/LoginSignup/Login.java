@@ -3,6 +3,7 @@ package com.example.login_signup.LoginSignup;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,7 +22,7 @@ import com.google.android.material.snackbar.Snackbar;
 public class Login extends AppCompatActivity {
 
     EditText editTextPhone, editTextPassword;
-    TextView ForgetPassword, signup;
+    TextView ForgetPassword, signup, blanktxt;
     Button buttonLogin;
     Login_Signin_Db dbHelper;
     LinearLayout mainLayout;
@@ -36,6 +37,7 @@ public class Login extends AppCompatActivity {
 
 
         editTextPhone = findViewById(R.id.textid);
+        blanktxt= findViewById(R.id.blanktxt);
         editTextPassword = findViewById(R.id.textpass);
         buttonLogin = findViewById(R.id.blogin);
         ForgetPassword = findViewById(R.id.textView);
@@ -76,6 +78,8 @@ public class Login extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
+                    blanktxt.setText("Invalid credentials!");
+                    blanktxt.setTextColor(Color.RED);
                     Snackbar.make(findViewById(android.R.id.content), "Invalid credentials!", Snackbar.LENGTH_SHORT).show();
                 }
             }
