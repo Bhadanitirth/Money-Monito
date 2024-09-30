@@ -73,7 +73,7 @@ public class AccountFragment extends Fragment {
                                 Toast.makeText(getContext(), "PIN is correct!", Toast.LENGTH_SHORT).show();
                                 updateBalanceVisibility(true);
                             } else {
-                                Toast.makeText(getContext(), "Incorrect PIN. Please try again.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Incorrect PIN . Please try again.", Toast.LENGTH_SHORT).show();
 
                                 show_balance.setChecked(false);
                             }

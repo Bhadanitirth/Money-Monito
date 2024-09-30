@@ -92,7 +92,7 @@ public class MoreFragment extends Fragment {
                             getActivity().finish();
 
                         } else {
-                            Toast.makeText(getContext(), "Incorrect PIN. Please try again.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "Incorrect PIN . Please try again.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 },phone);

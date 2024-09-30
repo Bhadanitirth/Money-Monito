@@ -127,6 +127,6 @@
         android:layout_marginStart="2dp"
         android:layout_toEndOf="@id/b0"
         app:srcCompat="@android:drawable/ic_input_delete"
-        android:contentDescription="Clear text"/>
+        android:contentDescription="Clear all text"/>
 
 </RelativeLayout>
