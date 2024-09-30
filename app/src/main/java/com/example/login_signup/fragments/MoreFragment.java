@@ -15,10 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.login_signup.Before_Home;
 import com.example.login_signup.LoginSignup.Login;
+import com.example.login_signup.PinDialog;
 import com.example.login_signup.Premium;
 import com.example.login_signup.R;
+import com.example.login_signup.SQLiteDB.FinancialDB;
 import com.example.login_signup.SQLiteDB.Login_Signin_Db;
 import com.example.login_signup.Tags;
 import com.example.login_signup.allEntry;
@@ -27,11 +31,12 @@ import com.example.login_signup.allEntry;
 public class MoreFragment extends Fragment {
 
     ImageView profile_img;
-    TextView logout,name;
+    TextView logout,name,Delete_Account;
     Intent intent;
     SharedPreferences sdp;
     CardView Transaction_card,GO_Premium_card,Tags_card;
     Login_Signin_Db database;
+    FinancialDB financialDB;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,18 +50,18 @@ public class MoreFragment extends Fragment {
         Tags_card=view.findViewById(R.id.Tags_card);
         name =view.findViewById(R.id.profile_name);
         profile_img=view.findViewById(R.id.profile_img);
+        Delete_Account=view.findViewById(R.id.Delete_Account);
 
         sdp = getActivity().getSharedPreferences("user_details", Context.MODE_PRIVATE);
         String phone = sdp.getString("phone", "null");
 
-        Login_Signin_Db dbHelper = new Login_Signin_Db(requireContext());
-        String firstName = dbHelper.getFirstNameByPhone(phone);
+        database = new Login_Signin_Db(requireContext());
+        financialDB=new FinancialDB(requireContext());
 
-
-        database=new Login_Signin_Db(getActivity());
+        String firstName = database.getFirstNameByPhone(phone);
 
         profile_img=view.findViewById(R.id.profile_img);
-        String gender=database.getGender(phone);
+        String gender= this.database.getGender(phone);
         if(gender.equals("Male")){
             profile_img.setImageResource(R.drawable.male);
         }else if(gender.equals("FeMale")){
@@ -72,29 +77,37 @@ public class MoreFragment extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                PinDialog pinDialog = new PinDialog(getContext(), new PinDialog.PinDialogListener() {
+                    @Override
+                    public void onPinEntered(String pin) {
+                        Boolean storedPin = database.getStoredPin(pin, phone);
+                        if (storedPin) {
+                            Toast.makeText(getContext(), "PIN is correct!", Toast.LENGTH_SHORT).show();
 
-                new AlertDialog.Builder(getActivity())
-                        .setTitle("Logout Confirmation")
-                        .setMessage("Are you sure you want to log out?")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                            SharedPreferences.Editor editor = sdp.edit();
+                            editor.clear();
+                            editor.commit();
+                            Intent intent = new Intent(getActivity(), Login.class);
+                            startActivity(intent);
+                            getActivity().finish();
 
-                                SharedPreferences.Editor editor = sdp.edit();
-                                editor.clear();
-                                editor.commit();
+                        } else {
+                            Toast.makeText(getContext(), "Incorrect PIN. Please try again.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },phone);
 
-
-                                intent = new Intent(getActivity(), Login.class);
-                                startActivity(intent);
-
-                            }
-                        })
-                        .setNegativeButton("No", null)
-                        .show();
+                pinDialog.showDialog();
             }
         });
 
+
+        Delete_Account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDeleteAccountConfirmationDialog(phone);
+            }
+        });
 
         Transaction_card.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,5 +138,31 @@ public class MoreFragment extends Fragment {
 
 
     return view;
+    }
+
+    private void showDeleteAccountConfirmationDialog(String phone) {
+        new AlertDialog.Builder(getActivity())
+                .setTitle("Delete Confirmation")
+                .setMessage("Are you sure you want to delete this Account?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        int login = database.DeleteAccount(phone,getContext());
+
+                        if (login > 0) {
+                            Toast.makeText(getActivity(), "Account Delete done", Toast.LENGTH_SHORT).show();
+                            SharedPreferences.Editor editor = sdp.edit();
+                            editor.clear();
+                            editor.commit();
+                            Intent intent = new Intent(getActivity(), Login.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(getActivity(), "Failed to delete account", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 }
