@@ -26,6 +26,33 @@
   Secure your data with a PIN to protect sensitive financial information.
 
 ## Screenshots
+<h3>2. Expense Overview</h3>
+
+<!-- First row with three images -->
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://raw.githubusercontent.com/Bhadanitirth/Money-Monito/main/Photo/Screenshot%202024-10-10%20213216.png" alt="Expense Overview" width="200"/>
+  <img src="https://raw.githubusercontent.com/Bhadanitirth/Money-Monito/main/Photo/Screenshot%202024-10-10%20214318.png" alt="Monthly Report" width="200"/>
+  <img src="https://raw.githubusercontent.com/Bhadanitirth/Money-Monito/main/Photo/Screenshot%202024-10-10%20213758.png" alt="Transfer History" width="200"/>
+    <img src="https://raw.githubusercontent.com/Bhadanitirth/Money-Monito/main/Photo/Screenshot%202024-10-10%20214451.png" alt="Notifications" width="200"/>
+</div>
+
+<details>
+  <summary>Show All Images</summary>
+
+  <!-- The rest of the images are hidden inside this collapsible section -->
+  
+  <img src="https://raw.githubusercontent.com/Bhadanitirth/Money-Monito/main/Photo/Screenshot%202024-10-10%20214409.png" alt="Detailed Expense Breakdown" width="200"/>
+    <img src="https://raw.githubusercontent.com/Bhadanitirth/Money-Monito/main/Photo/Screenshot%202024-10-10%20214335.png" alt="Settings" width="200"/>
+  <img src="https://raw.githubusercontent.com/Bhadanitirth/Money-Monito/main/Photo/Screenshot%202024-10-10%20214510.png" alt="User Profile" width="200"/>
+  <img src="https://raw.githubusercontent.com/Bhadanitirth/Money-Monito/main/Photo/Screenshot%202024-10-10%20214537.png" alt="Budget Planner" width="200"/>
+  <img src="https://raw.githubusercontent.com/Bhadanitirth/Money-Monito/main/Photo/Screenshot%202024-10-10%20214556.png" alt="App Feedback" width="200"/>
+  <img src="https://raw.githubusercontent.com/Bhadanitirth/Money-Monito/main/Photo/Screenshot%202024-10-10%20213741.png" alt="Income Tracker" width="200"/>
+  <img src="https://raw.githubusercontent.com/Bhadanitirth/Money-Monito/main/Photo/Screenshot%202024-10-10%20213116.png" alt="Home Screen" width="200"/>
+  <img src="https://raw.githubusercontent.com/Bhadanitirth/Money-Monito/main/Photo/Screenshot%202024-10-10%20214924.png" alt="Help and Support" width="200"/>
+
+</details>
+
+
 
 
 ## Installation
