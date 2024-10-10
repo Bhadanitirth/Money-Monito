@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/add_dialog_bg">
+
+    <TextView
+        android:id="@+id/Category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:text="Select Category" />
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="4"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/Category"
+        android:layout_centerHorizontal="true">
+
+        <!-- Category 1: Other -->
+        <LinearLayout
+            android:id="@+id/category_other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/category_other_image"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/other" />
+
+            <TextView
+                android:id="@+id/category_other_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Other"
+                android:textSize="16dp"
+                android:gravity="center"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Category 2: Salary -->
+        <LinearLayout
+            android:id="@+id/category_salary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/category_salary_image"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/salary" />
+
+            <TextView
+                android:id="@+id/category_salary_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Salary"
+                android:textSize="16dp"
+                android:gravity="center"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Category 3: Sold Items -->
+        <LinearLayout
+            android:id="@+id/category_sold_items"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/category_sold_items_image"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/sold" />
+
+            <TextView
+                android:id="@+id/category_sold_items_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sold Items"
+                android:textSize="16dp"
+                android:gravity="center"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Category 4: Coupons -->
+        <LinearLayout
+            android:id="@+id/category_coupons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/category_coupons_image"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/coupon" />
+
+            <TextView
+                android:id="@+id/category_coupons_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Coupons"
+                android:textSize="16dp"
+                android:gravity="center"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+    </GridLayout>
+
+</RelativeLayout>

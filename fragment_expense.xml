@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.Expense"
+    android:layout_margin="8dp">
+
+    <!-- TODO: Update blank fragment layout -->
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<RelativeLayout
+    android:id="@+id/date_time"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="40dp"
+    android:layout_centerHorizontal="true">
+
+    <EditText
+        android:id="@+id/date_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:hint="Select date"
+        android:drawableStart="@drawable/calendar"
+        android:drawablePadding="10dp"
+        android:focusable="false"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:clickable="true"/>
+
+    <EditText
+        android:id="@+id/time_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Select time"
+        android:layout_marginStart="60dp"
+        android:drawableStart="@drawable/clock"
+        android:drawablePadding="10dp"
+        android:layout_toEndOf="@+id/date_picker"
+        android:focusable="false"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:clickable="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/other_info"
+        android:layout_below="@+id/date_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp">
+
+    <TextView
+        android:id="@+id/Amount"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Amount"/>
+
+    <EditText
+        android:id="@+id/Amount_No"
+        android:layout_below="@+id/Amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="0"
+        android:inputType="number"
+        android:drawableStart="@drawable/rupee"
+        android:drawablePadding="20dp"
+        android:drawableEnd="@drawable/calc"
+        android:textStyle="bold"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/Category"
+        android:layout_below="@+id/Amount_No"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category"/>
+
+
+        <ImageView
+            android:id="@+id/selected_category_image"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/Category"
+            android:layout_marginTop="22dp"
+            android:src="@drawable/other"
+            android:contentDescription="Selected Category Image"/>
+
+        <EditText
+            android:id="@+id/Select_Category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Category"
+            android:layout_marginTop="14dp"
+            android:layout_marginStart="10dp"
+            android:clickable="true"
+            android:layout_toEndOf="@id/selected_category_image"
+            android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+            android:drawablePadding="20dp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:text="Other"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+
+        <TextView
+        android:id="@+id/Payment_Method"
+        android:layout_below="@+id/Select_Category"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Payment Method"/>
+
+
+        <ImageView
+            android:id="@+id/pay_img"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/Payment_Method"
+            android:layout_marginTop="22dp"
+            android:src="@drawable/bank"
+            android:contentDescription="Selected Category Image"/>
+
+        <EditText
+            android:id="@+id/pay_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Payment_Method"
+            android:layout_marginTop="14dp"
+            android:layout_marginStart="10dp"
+            android:clickable="true"
+            android:layout_toEndOf="@id/selected_category_image"
+            android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+            android:drawablePadding="20dp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:text="Bank Account"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/OtherDetail"
+            android:layout_below="@+id/pay_img"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other details"/>
+
+        <EditText
+            android:id="@+id/note"
+            android:layout_below="@+id/OtherDetail"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/notes"
+            android:drawablePadding="20dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:hint="Write a note"/>
+
+        <EditText
+            android:id="@+id/Attachment"
+            android:layout_below="@+id/note"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/attachment"
+            android:drawablePadding="20dp"
+            android:drawableEnd="@drawable/baseline_arrow_forward_ios_24"
+            android:textSize="20dp"
+            android:clickable="true"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="Add Attachment"/>
+
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/Save"
+        android:layout_below="@+id/other_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="20dp"
+        android:src="@android:drawable/ic_menu_save"
+        android:contentDescription="Save"/>
+
+    <TextView
+        android:layout_below="@id/Save"
+        android:layout_width="150dp"
+        android:layout_height="150dp"/>
+
+</RelativeLayout>
+
+</ScrollView>
+
+</RelativeLayout>

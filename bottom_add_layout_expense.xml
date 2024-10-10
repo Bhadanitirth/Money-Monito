@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/add_dialog_bg">
+
+    <TextView
+        android:id="@+id/Category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:text="Select Category"/>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/Category"
+        android:layout_centerHorizontal="true">
+
+        <!-- Category 1: Other -->
+        <LinearLayout
+            android:id="@+id/category_other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/icon_other"
+                android:layout_width="50dp"
+                android:layout_marginStart="5dp"
+                android:layout_height="50dp"
+                android:src="@drawable/other" />
+
+            <TextView
+                android:id="@+id/text_other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Other"
+                android:textSize="16dp"
+                android:gravity="center"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Category 2: Food -->
+        <LinearLayout
+            android:id="@+id/category_food"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/icon_food"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/food" />
+
+            <TextView
+                android:id="@+id/text_food"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Food"
+                android:textSize="16dp"
+                android:gravity="center"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Category 3: Shopping -->
+        <LinearLayout
+            android:id="@+id/category_shopping"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/icon_shopping"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/shopping" />
+
+            <TextView
+                android:id="@+id/text_shopping"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Shopping"
+                android:textSize="16dp"
+                android:gravity="center"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Category 4: Travelling -->
+        <LinearLayout
+            android:id="@+id/category_travelling"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/icon_travelling"
+                android:layout_width="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_height="50dp"
+                android:src="@drawable/travel" />
+
+            <TextView
+                android:id="@+id/text_travelling"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Travelling"
+                android:textSize="16dp"
+                android:gravity="center"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Category 5: Medical -->
+        <LinearLayout
+            android:id="@+id/category_medical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/icon_medical"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/medical" />
+
+            <TextView
+                android:id="@+id/text_medical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medical"
+                android:textSize="16dp"
+                android:gravity="center"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Category 6: Education -->
+        <LinearLayout
+            android:id="@+id/category_education"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/icon_education"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/education" />
+
+            <TextView
+                android:id="@+id/text_education"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Education"
+                android:textSize="16dp"
+                android:gravity="center"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Category 7: Rent -->
+        <LinearLayout
+            android:id="@+id/category_rent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/icon_rent"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/rent" />
+
+            <TextView
+                android:id="@+id/text_rent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rent"
+                android:textSize="16dp"
+                android:gravity="center"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Category 8: Entertainment -->
+        <LinearLayout
+            android:id="@+id/category_entertainment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/icon_entertainment"
+                android:layout_width="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_height="50dp"
+                android:src="@drawable/game" />
+
+            <TextView
+                android:id="@+id/text_entertainment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Entertainment"
+                android:textSize="16dp"
+                android:gravity="center"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Category 9: Personal Care -->
+        <LinearLayout
+            android:id="@+id/category_personal_care"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/icon_personal_care"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="15dp"
+                android:src="@drawable/personal_care" />
+
+            <TextView
+                android:id="@+id/text_personal_care"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Personal Care"
+                android:textSize="16dp"
+                android:gravity="center"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Category 10: Gift and Donation -->
+        <LinearLayout
+            android:id="@+id/category_gift_donation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/icon_gift_donation"
+                android:layout_width="50dp"
+                android:layout_marginStart="35dp"
+                android:layout_height="50dp"
+                android:src="@drawable/gift_and_donation" />
+
+            <TextView
+                android:id="@+id/text_gift_donation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gift and donation"
+                android:textSize="16dp"
+                android:gravity="center"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+    </GridLayout>
+
+</RelativeLayout>
