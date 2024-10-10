@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.Month"
+    android:layout_margin="8dp">
+
+    <!-- TODO: Update blank fragment layout -->
+
+        <TextView
+            android:id="@+id/month_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"/>
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/month_text">
+
+        <RelativeLayout
+            android:id="@+id/relative"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/spending_income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:layout_margin="16dp">
+
+                <!-- Spending Card -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/spendingcard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    card_view:cardCornerRadius="30dp"
+                    card_view:cardElevation="10dp"
+                    android:background="@drawable/edit_text_background"
+                    card_view:cardBackgroundColor="@color/red">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp">
+
+                        <ImageView
+                            android:id="@+id/img_inc"
+                            android:layout_width="40dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="5dp"
+                            android:src="@drawable/up"/>
+                        <TextView
+                            android:id="@+id/spendingText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Spending"
+                            android:layout_toEndOf="@id/img_inc"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/spendingAmount"
+                            android:layout_below="@+id/spendingText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:layout_toEndOf="@id/img_inc"
+                            android:text="text"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:layout_marginTop="5dp" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Income Card -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/incomecard"
+                    android:layout_toEndOf="@+id/spendingcard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    card_view:cardCornerRadius="30dp"
+                    card_view:cardElevation="10dp"
+                    android:background="@drawable/edit_text_background"
+                    card_view:cardBackgroundColor="@color/green">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp">
+
+                        <ImageView
+                            android:id="@+id/img_dec"
+                            android:layout_width="40dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="5dp"
+                            android:src="@drawable/down"/>
+                        <TextView
+                            android:id="@+id/incomeText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Income  "
+                            android:layout_toEndOf="@id/img_dec"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:id="@+id/incomeAmount"
+                            android:layout_below="@+id/incomeText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="bold"
+                            android:text="text"
+                            android:layout_toEndOf="@id/img_dec"
+                            android:textColor="@color/black"
+                            android:textSize="20dp"
+                            android:layout_marginTop="5dp" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/balanceTextcard"
+                android:layout_below="@+id/spending_income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                card_view:cardCornerRadius="30dp"
+                card_view:cardElevation="10dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/edit_text_background"
+                card_view:cardBackgroundColor="@color/white">
+                <!-- Balance Text -->
+
+                <TextView
+                    android:id="@+id/balanceText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="text"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_margin="10dp"/>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/categories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/balanceTextcard"
+                android:text="Categories"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_margin="8dp" />
+
+            <!-- Category-wise spending card -->
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/spending_card"
+                android:layout_below="@+id/categories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="8dp"
+                card_view:cardElevation="4dp"
+                card_view:cardCornerRadius="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/category_wise_spending"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Category-Wise spending"
+                    android:layout_gravity="center"
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
+
+                <!-- Round graph  -->
+                <com.github.mikephil.charting.charts.PieChart
+                    android:layout_below="@id/category_wise_spending"
+                    android:id="@+id/spending_pieChart"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_centerHorizontal="true" />
+
+                <RelativeLayout
+                    android:id="@+id/diff_categorys_spending"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/spending_pieChart"
+                    android:layout_centerHorizontal="true">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/user_list_spending"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_centerHorizontal="true"/>
+
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Category-wise Income card -->
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/income_card"
+                android:layout_below="@+id/spending_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="8dp"
+                card_view:cardElevation="4dp"
+                card_view:cardCornerRadius="8dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/category_wise_income"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Category-Wise income"
+                    android:layout_gravity="center"
+                    android:textSize="16sp"
+                    android:layout_marginTop="8dp" />
+
+                <!-- Round graph (Donut chart) -->
+                <com.github.mikephil.charting.charts.PieChart
+                    android:layout_below="@id/category_wise_income"
+                    android:id="@+id/income_pieChart"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_centerHorizontal="true" />
+
+                <RelativeLayout
+                    android:id="@+id/diff_categorys_income"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/income_pieChart"
+                    android:layout_centerHorizontal="true">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/user_list_income"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_centerHorizontal="true"/>
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Payment modes Section -->
+            <TextView
+                android:id="@+id/Payment_modes"
+                android:layout_below="@+id/income_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Payment modes"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_margin="8dp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Payment"
+                android:layout_below="@+id/Payment_modes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="8dp"
+                card_view:cardElevation="4dp"
+                card_view:cardCornerRadius="8dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    >
+
+            <!-- Spending card -->
+            <RelativeLayout
+                android:id="@+id/spending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="16dp">
+
+                <TextView
+                    android:id="@+id/spending_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Spending"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="8dp"
+                    android:textSize="16dp" />
+
+                <!-- Spending text -->
+                <TextView
+                    android:id="@+id/cash_spending"
+                    android:layout_below="@+id/spending_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Cash"
+                    android:layout_marginStart="40dp"
+                    android:textSize="16dp" />
+
+                <!-- Amount -->
+                <TextView
+                    android:id="@+id/cash_amount_spending"
+                    android:layout_below="@+id/spending_txt"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₹50.0"
+                    android:textSize="16dp"
+                    android:layout_gravity="center_vertical" />
+
+                <!-- Spending text -->
+                <TextView
+                    android:id="@+id/bank_account_spending"
+                    android:layout_below="@+id/cash_amount_spending"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Bank_Account"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="40dp"
+                    android:textSize="16dp" />
+
+                <!-- Amount -->
+                <TextView
+                    android:id="@+id/bank_account_amount_spending"
+                    android:layout_below="@+id/cash_amount_spending"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₹50.0"
+                    android:textSize="16dp"
+                    android:layout_gravity="center_vertical" />
+
+
+            </RelativeLayout>
+
+            <!-- Income card -->
+            <RelativeLayout
+                android:id="@+id/income"
+                android:layout_below="@+id/spending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="16dp">
+
+                <TextView
+                    android:id="@+id/income_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Income"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="8dp"
+                    android:textSize="16dp" />
+
+                <!-- Income text -->
+                <TextView
+                    android:id="@+id/cash_income"
+                    android:layout_below="@+id/income_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Cash"
+                    android:layout_marginStart="40dp"
+                    android:textSize="16dp" />
+
+                <!-- Amount -->
+                <TextView
+                    android:id="@+id/cash_amount_income"
+                    android:layout_below="@+id/income_txt"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₹50.0"
+                    android:textSize="16dp"
+                    android:layout_gravity="center_vertical" />
+
+                <!-- Income text -->
+                <TextView
+                    android:id="@+id/bank_account_income"
+                    android:layout_below="@+id/cash_amount_income"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Bank_Account"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="40dp"
+                    android:textSize="16dp" />
+
+                <!-- Amount -->
+                <TextView
+                    android:id="@+id/bank_account_amount_income"
+                    android:layout_below="@+id/cash_amount_income"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₹50.0"
+                    android:textSize="16dp"
+                    android:layout_gravity="center_vertical" />
+
+
+            </RelativeLayout>
+
+
+
+            <!-- Transfers card -->
+            <RelativeLayout
+                android:id="@+id/transfers"
+                android:layout_below="@+id/income"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="16dp">
+
+                <TextView
+                    android:id="@+id/transfers_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Transfers"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="8dp"
+                    android:textSize="16dp" />
+
+                <!-- Transfer text -->
+                <TextView
+                    android:id="@+id/cash_transfers"
+                    android:layout_below="@+id/transfers_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Cash -> Bank Account"
+                    android:layout_marginStart="40dp"
+                    android:textSize="16dp" />
+
+                <!-- Amount -->
+                <TextView
+                    android:id="@+id/cash_amount_transfers"
+                    android:layout_below="@+id/transfers_txt"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₹50.0"
+                    android:textSize="16dp"
+                    android:layout_gravity="center_vertical" />
+
+                <TextView
+                    android:id="@+id/bank_account_transfers"
+                    android:layout_below="@+id/cash_amount_transfers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="10dp"
+                    android:text="Bank Account -> Cash"
+                    android:layout_marginStart="40dp"
+                    android:textSize="16dp" />
+
+                <!-- Amount -->
+                <TextView
+                    android:id="@+id/bank_account_amount_transfers"
+                    android:layout_below="@+id/cash_amount_transfers"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="₹50.0"
+                    android:textSize="16dp"
+                    android:layout_gravity="center_vertical" />
+
+
+            </RelativeLayout>
+            </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <TextView
+                android:id="@+id/Stats"
+                android:layout_below="@+id/Payment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Stats"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_margin="8dp" />
+
+            <!-- Spending card -->
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/monthStats"
+            android:layout_below="@+id/Stats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
+            card_view:cardElevation="4dp"
+            card_view:cardCornerRadius="8dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+            <RelativeLayout
+                android:id="@+id/transactions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="16dp">
+
+                <TextView
+                    android:id="@+id/Transaction_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Number of Transaction"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="8dp"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/Transaction_amount"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₹50.0"
+                    android:textSize="16dp"
+                    android:layout_gravity="center_vertical" />
+
+            </RelativeLayout>
+
+            <!-- Income card -->
+            <RelativeLayout
+                android:id="@+id/AvgSpending"
+                android:layout_below="@+id/transactions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="16dp">
+
+                <TextView
+                    android:id="@+id/AverageSpending"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Average Spending"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="8dp"
+                    android:textSize="16dp" />
+
+                <!-- Income text -->
+                <TextView
+                    android:id="@+id/PerDay"
+                    android:layout_below="@+id/AverageSpending"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Per Day"
+                    android:layout_marginStart="40dp"
+                    android:textSize="16dp" />
+
+                <!-- Amount -->
+                <TextView
+                    android:id="@+id/PerDay_amount"
+                    android:layout_below="@+id/AverageSpending"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₹50.0"
+                    android:textSize="16dp"
+                    android:layout_gravity="center_vertical" />
+
+                <!-- Income text -->
+                <TextView
+                    android:id="@+id/PerTransaction"
+                    android:layout_below="@+id/PerDay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Per Transaction"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="40dp"
+                    android:textSize="16dp" />
+
+                <!-- Amount -->
+                <TextView
+                    android:id="@+id/PerTransaction_amount"
+                    android:layout_below="@+id/PerDay"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₹50.0"
+                    android:textSize="16dp"
+                    android:layout_gravity="center_vertical" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/AvgIncome"
+                android:layout_below="@+id/AvgSpending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="16dp">
+
+                <TextView
+                    android:id="@+id/AverageIncome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Average Income"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="8dp"
+                    android:textSize="16dp" />
+
+                <!-- Income text -->
+                <TextView
+                    android:id="@+id/PerDayIncome"
+                    android:layout_below="@+id/AverageIncome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Per Day"
+                    android:layout_marginStart="40dp"
+                    android:textSize="16dp" />
+
+                <!-- Amount -->
+                <TextView
+                    android:id="@+id/PerDayIncome_amount"
+                    android:layout_below="@+id/AverageIncome"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₹50.0"
+                    android:textSize="16dp"
+                    android:layout_gravity="center_vertical" />
+
+                <!-- Income text -->
+                <TextView
+                    android:id="@+id/PerIncomeTransaction"
+                    android:layout_below="@+id/PerDayIncome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Per Transaction"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="40dp"
+                    android:textSize="16dp" />
+
+                <!-- Amount -->
+                <TextView
+                    android:id="@+id/PerIncomeTransaction_amount"
+                    android:layout_below="@+id/PerDayIncome"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="₹50.0"
+                    android:textSize="16dp"
+                    android:layout_gravity="center_vertical" />
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@+id/monthStats"
+                android:layout_alignParentBottom="true" />
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
