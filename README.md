@@ -26,7 +26,6 @@
   Secure your data with a PIN to protect sensitive financial information.
 
 ## Screenshots
-<h3>2. Expense Overview</h3>
 
 <!-- First row with three images -->
 <div style="display: flex; justify-content: space-between;">
