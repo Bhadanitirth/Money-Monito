@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.MoreFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ImageView
+        android:id="@+id/profile_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        card_view:srcCompat="@drawable/baseline_person_24" />
+
+    <TextView
+        android:id="@+id/profile_name"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@+id/profile_img"
+        android:text="Name" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/profile_img"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Transaction_card"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                card_view:cardCornerRadius="32dp"
+                card_view:cardElevation="16dp"
+                android:background="@drawable/edit_text_background">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/Transaction_img"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/tran_list"/>
+
+                <TextView
+                    android:id="@+id/Transaction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:layout_toEndOf="@id/Transaction_img"
+                    android:padding="14dp"
+                    android:text="Transaction" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Scheduled_Txns_card"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                card_view:cardCornerRadius="32dp"
+                card_view:cardElevation="16dp"
+                android:layout_toEndOf="@id/Transaction_card"
+                android:background="@drawable/edit_text_background">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/Scheduled_img"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/sch_txns"/>
+
+                <TextView
+                    android:id="@+id/Scheduled_Txns"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:padding="14dp"
+                    android:layout_toEndOf="@id/Scheduled_img"
+                    android:text="Scheduled" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Budget_card"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                card_view:cardCornerRadius="30dp"
+                card_view:cardElevation="10dp"
+                android:layout_below="@+id/Transaction_card"
+                android:background="@drawable/edit_text_background">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/Budget_img"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/budgets"/>
+
+                <TextView
+                    android:id="@+id/Budget"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:layout_toEndOf="@id/Budget_img"
+                    android:padding="14dp"
+                    android:layout_gravity="center"
+                    android:text="Budget" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Categories_card"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                card_view:cardCornerRadius="30dp"
+                card_view:cardElevation="10dp"
+                android:layout_below="@id/Scheduled_Txns_card"
+                android:layout_toEndOf="@id/Budget_card"
+                android:background="@drawable/edit_text_background">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/Categories_img"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/category"/>
+
+                <TextView
+                    android:id="@+id/Categories"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:layout_gravity="center"
+                    android:padding="14dp"
+                    android:layout_toEndOf="@+id/Categories_img"
+                    android:text="Categories" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Tags_card"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                card_view:cardCornerRadius="30dp"
+                card_view:cardElevation="10dp"
+                android:layout_below="@+id/Budget_card"
+                android:background="@drawable/edit_text_background">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/Tags_img"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/hash"/>
+
+                <TextView
+                    android:id="@+id/Tags"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:layout_gravity="center"
+                    android:padding="14dp"
+                    android:layout_toEndOf="@+id/Tags_img"
+                    android:text="Tags" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/GO_Premium_card"
+                android:layout_width="145dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                card_view:cardCornerRadius="30dp"
+                card_view:cardElevation="10dp"
+                android:layout_below="@id/Categories_card"
+                android:layout_toEndOf="@id/Tags_card"
+                android:background="@drawable/edit_text_background">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/GO_Premium_img"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/diamond"/>
+
+                <TextView
+                    android:id="@+id/GO_Premium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:layout_gravity="center"
+                    android:padding="14dp"
+                    android:layout_toEndOf="@id/GO_Premium_img"
+                    android:text="Premium" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/views"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Tags_card"
+                android:text="Views"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="20dp"/>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Day_card"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                card_view:cardCornerRadius="30dp"
+                card_view:cardElevation="10dp"
+                android:layout_below="@id/views"
+                android:background="@drawable/edit_text_background">
+
+                <TextView
+                    android:id="@+id/Day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="16dp"
+                    android:padding="16dp"
+                    android:text="Day" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Month_card"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                card_view:cardCornerRadius="30dp"
+                card_view:cardElevation="10dp"
+                android:layout_below="@id/views"
+                android:layout_toEndOf="@id/Day_card"
+                android:background="@drawable/edit_text_background">
+
+                <TextView
+                    android:id="@+id/Month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textSize="16dp"
+                    android:padding="16dp"
+                    android:text="Month" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Custom_card"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                card_view:cardCornerRadius="30dp"
+                card_view:cardElevation="10dp"
+                android:layout_below="@id/views"
+                android:layout_toEndOf="@id/Month_card"
+                android:background="@drawable/edit_text_background">
+
+                <TextView
+                    android:id="@+id/Custom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:layout_gravity="center"
+                    android:padding="16dp"
+                    android:text="Custom" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/More_options"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Day_card"
+                android:text="More options"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="20dp"/>
+
+            <GridLayout
+                android:id="@+id/Setting_lay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/More_options">
+
+                <ImageView
+                    android:id="@+id/Setting_img"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="5dp"
+                    card_view:srcCompat="@drawable/setting" />
+
+                <TextView
+                    android:id="@+id/Setting_s"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textSize="16dp"
+                    android:padding="8dp"
+                    android:text="Setting" />
+
+            </GridLayout>
+
+            <GridLayout
+                android:id="@+id/Invite_friend_lay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Setting_lay">
+                <ImageView
+                    android:id="@+id/Invite_friend_img"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_margin="5dp"
+                    card_view:srcCompat="@drawable/invite_friend" />
+
+                <TextView
+                    android:id="@+id/Invite_friend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textSize="16dp"
+                    android:padding="8dp"
+                    android:text="Invite friend" />
+
+            </GridLayout>
+
+            <GridLayout
+                android:id="@+id/Rate_app_lay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Invite_friend_lay">
+                <ImageView
+                    android:id="@+id/Rate_app_img"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="5dp"
+                    card_view:srcCompat="@drawable/rate" />
+
+                <TextView
+                    android:id="@+id/Rate_app"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textSize="16dp"
+                    android:padding="8dp"
+                    android:text="Rate app" />
+
+            </GridLayout>
+
+            <GridLayout
+                android:id="@+id/Query_feedback_lay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Rate_app_lay">
+                <ImageView
+                    android:id="@+id/Query_feedback_img"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="5dp"
+                    card_view:srcCompat="@drawable/feedback" />
+
+                <TextView
+                    android:id="@+id/Query_feedback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textSize="16dp"
+                    android:padding="8dp"
+                    android:text="Query feedback" />
+
+            </GridLayout>
+
+            <GridLayout
+                android:id="@+id/FAQs_lay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Query_feedback_lay">
+                <ImageView
+                    android:id="@+id/FAQs_img"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="5dp"
+                    card_view:srcCompat="@drawable/faqs" />
+
+                <TextView
+                    android:id="@+id/FAQ_s"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textSize="16dp"
+                    android:padding="8dp"
+                    android:text="FAQs" />
+
+            </GridLayout>
+
+            <GridLayout
+                android:id="@+id/About_app_lay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/FAQs_lay">
+                <ImageView
+                    android:id="@+id/About_app_img"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="5dp"
+                    card_view:srcCompat="@drawable/about_app" />
+
+                <TextView
+                    android:id="@+id/About_app"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textSize="16dp"
+                    android:padding="8dp"
+                    android:text="About app" />
+
+            </GridLayout>
+
+            <GridLayout
+                android:id="@+id/log_out_lay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/About_app_lay">
+
+                <ImageView
+                    android:id="@+id/log_out_img"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="5dp"
+                    card_view:srcCompat="@drawable/sout" />
+
+                <TextView
+                    android:id="@+id/log_out"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textSize="16dp"
+                    android:layout_margin="8dp"
+                    android:text="Sign out"/>
+
+            </GridLayout>
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_below="@+id/Delete_Account"/>
+
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+</RelativeLayout>
